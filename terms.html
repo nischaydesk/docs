@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>नियम व शर्तें (Terms & Conditions) - Nischay Docs</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root[data-theme="light"] {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-elevated: #f1f5f9;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --card-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
+    }
+
+    :root[data-theme="dark"] {
+      --bg-base: #070b14;
+      --bg-surface: #0f172a;
+      --bg-elevated: #1e293b;
+      --border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --header-bg: rgba(15, 23, 42, 0.9);
+      --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    :root {
+      --primary: #2563eb;
+      --accent-green: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.7;
+    }
+
+    header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-logo-svg {
+      width: 40px;
+      height: 40px;
+    }
+    .brand-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+    .brand-title span {
+      background: linear-gradient(135deg, #2563eb, #0284c7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-sub {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-wa-header {
+      background: #25d366;
+      color: #ffffff;
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+    }
+
+    .btn-back-home {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .content-container {
+      max-width: 860px;
+      width: 90%;
+      margin: 40px auto 60px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .page-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .last-updated {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .section-block {
+      margin-bottom: 26px;
+    }
+    .section-block h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .section-block p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .section-block ul {
+      margin-left: 20px;
+      margin-bottom: 12px;
+    }
+    .section-block li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .wa-banner-card {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(16, 185, 129, 0.15));
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .wa-banner-card h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .wa-banner-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 500px;
+    }
+    .btn-wa-channel {
+      background: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+    }
+    .btn-wa-channel:hover {
+      background: #1ebc57;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: #091224;
+      border-top: 1px solid #1a263e;
+      padding: 35px 20px 25px;
+      text-align: center;
+      margin-top: auto;
+      color: #94a3b8;
+    }
+    .footer-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .footer-brand {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .footer-brand span {
+      color: #38bdf8;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .footer-links a:hover {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand">
+      <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="48" fill="#ffffff" stroke="#cbd5e1" stroke-width="2.5"/>
+        <rect x="28" y="24" width="36" height="44" rx="5" fill="#2563eb"/>
+        <path d="M50 24L64 38H54C51.8 38 50 36.2 50 34V24Z" fill="#1d4ed8"/>
+        <line x1="34" y1="42" x2="45" y2="42" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="34" y1="49" x2="56" y2="49" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="34" y1="56" x2="48" y2="56" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="64" cy="64" r="14" fill="#059669" stroke="#ffffff" stroke-width="2.5"/>
+        <path d="M58 64L62 68L70 60" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <div class="brand-title">Nischay<span>Docs</span></div>
+        <div class="brand-sub">Terms of Service</div>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <a href="https://whatsapp.com/channel/0029VbDgXJG0lwgytlQMHP0I" target="_blank" class="btn-wa-header">
+        📢 WhatsApp चैनल
+      </a>
+      <a href="index.html" class="btn-back-home">← मुख्य टूल</a>
+    </div>
+  </header>
+
+  <main class="content-container">
+    <div class="page-header">
+      <h1>नियम व शर्तें (Terms & Conditions)</h1>
+      <div class="last-updated">अंतिम अपडेट: 10 अक्टूबर 2026</div>
+    </div>
+
+    <div class="section-block">
+      <p>Nischay Docs ("वेबसाइट", "हम") का उपयोग करने के लिए आपका स्वागत है। हमारी वेबसाइट का उपयोग करके आप निम्नलिखित नियमों और शर्तों से बंधे होने की सहमति देते हैं। कृपया इन्हें ध्यान से पढ़ें।</p>
+    </div>
+
+    <div class="section-block">
+      <h2>1. सेवा का उद्देश्य</h2>
+      <p>Nischay Docs भारतीय छात्रों, साइबर कैफे संचालकों और आम नागरिकों की सहायता के लिए बनाया गया एक निःशुल्क यूटिलिटी टूल है। इसका मुख्य उद्देश्य सरकारी फॉर्म, प्रवेश परीक्षा और ऑनलाइन आवेदनों के लिए फोटो, मार्कशीट और सिग्नेचर को तय फाइल साइज (KB) में बदलना है।</p>
+    </div>
+
+    <div class="section-block">
+      <h2>2. उपयोगकर्ता की जिम्मेदारी</h2>
+      <p>यद्यपि हमारा टूल उच्चतम क्लैरिटी और सटीक फाइल साइज देने के लिए विकसित किया गया है, फिर भी उपयोगकर्ता से यह अनुरोध है कि:</p>
+      <ul>
+        <li>किसी भी सरकारी या आधिकारिक पोर्टल पर फाइल अपलोड करने से पहले उसके साइज, नाम और लिखावट की स्पष्टता की स्वयं जांच कर लें।</li>
+        <li>किसी भी गैर-कानूनी या अनुचित दस्तावेज को प्रोसेस करने की जिम्मेदारी स्वयं उपयोगकर्ता की होगी।</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2>3. बौद्धिक संपदा अधिकार</h2>
+      <p>Nischay Docs का डिज़ाइन, लोगो और सोर्स कोड Nischay Docs की बौद्धिक संपदा हैं। किसी भी व्यावसायिक लाभ के लिए इसकी नकल या अनधिकृत वितरण की अनुमति नहीं है।</p>
+    </div>
+
+    <div class="section-block">
+      <h2>4. दायित्व की सीमा (Disclaimer of Liability)</h2>
+      <p>यह टूल "जैसा है" (As-Is) आधार पर मुफ्त प्रदान किया जाता है। किसी सरकारी पोर्टल द्वारा तकनीकी कारणों से आवेदन पत्र अस्वीकार होने या किसी अप्रत्याशित समस्या के लिए Nischay Docs प्रत्यक्ष या अप्रत्यक्ष रूप से उत्तरदायी नहीं होगा।</p>
+    </div>
+
+    <div class="section-block">
+      <h2>5. शर्तों में संशोधन</h2>
+      <p>हम बिना किसी पूर्व सूचना के समय-समय पर इन नियमों में आवश्यक बदलाव करने का अधिकार सुरक्षित रखते हैं। वेबसाइट का निरंतर उपयोग आपके द्वारा नए नियमों की स्वीकृति माना जाएगा।</p>
+    </div>
+
+    <!-- WhatsApp चैनल जॉइन बॉक्स -->
+    <div class="wa-banner-card">
+      <h3>📢 हमारे WhatsApp चैनल से जुड़ें</h3>
+      <p>लेटेस्ट सरकारी जॉब्स, फॉर्म अपडेट्स और नए टूल्स की जानकारी अपने फोन पर सीधे पाने के लिए हमारे WhatsApp चैनल को फॉलो करें।</p>
+      <a href="https://whatsapp.com/channel/0029VbDgXJG0lwgytlQMHP0I" target="_blank" class="btn-wa-channel">
+        🟢 WhatsApp चैनल जॉइन करें
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Nischay<span>Docs</span></div>
+      <p style="font-size: 12px; margin: 0;">छात्रों के लिए 100% मुफ़्त और सुरक्षित फ़ाइल रिसाइज़र</p>
+      
+      <div class="footer-links">
+        <a href="index.html">मुख्य रिसाइज़र टूल</a>
+        <a href="privacy.html">प्राइवेसी पॉलिसी</a>
+        <a href="terms.html">नियम व शर्तें</a>
+        <a href="https://whatsapp.com/channel/0029VbDgXJG0lwgytlQMHP0I" target="_blank" style="color: #25d366;">WhatsApp चैनल</a>
+      </div>
+
+      <div class="footer-copy">© 2026 Nischay Docs • सर्वाधिकार सुरक्षित</div>
+    </div>
+  </footer>
+
+</body>
+</html>
