@@ -9,41 +9,39 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- HEIC कन्वर्टर और कॉन्फ़ेटी इंजन -->
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     :root[data-theme="light"] {
       --bg-base: #f0f4f9;
-      --bg-surface: rgba(255, 255, 255, 0.85);
-      --bg-elevated: rgba(241, 245, 249, 0.9);
-      --border: rgba(226, 232, 240, 0.8);
+      --bg-surface: rgba(255, 255, 255, 0.9);
+      --bg-elevated: #ffffff;
+      --border: #e2e8f0;
       --text-main: #0f172a;
       --text-muted: #64748b;
-      --header-bg: rgba(255, 255, 255, 0.8);
-      --card-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.12);
+      --header-bg: rgba(255, 255, 255, 0.85);
+      --card-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
       --laser-color: #0284c7;
       --preview-wrap: #e2e8f0;
-      --glow-color: rgba(37, 99, 235, 0.2);
     }
 
     :root[data-theme="dark"] {
       --bg-base: #060913;
-      --bg-surface: rgba(15, 23, 42, 0.85);
-      --bg-elevated: rgba(30, 41, 59, 0.8);
-      --border: rgba(51, 65, 85, 0.8);
+      --bg-surface: rgba(15, 23, 42, 0.9);
+      --bg-elevated: #1e293b;
+      --border: #334155;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --header-bg: rgba(15, 23, 42, 0.8);
-      --card-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
+      --header-bg: rgba(15, 23, 42, 0.85);
+      --card-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
       --laser-color: #38bdf8;
       --preview-wrap: #030712;
-      --glow-color: rgba(56, 189, 248, 0.25);
     }
 
     :root {
       --primary: #2563eb;
-      --primary-hover: #1d4ed8;
       --accent-green: #10b981;
       --whatsapp-green: #25d366;
     }
@@ -54,7 +52,7 @@
       padding: 0;
       font-family: 'Poppins', sans-serif;
       -webkit-tap-highlight-color: transparent;
-      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     body {
@@ -68,7 +66,6 @@
       overflow-x: hidden;
     }
 
-    /* साइबर बैकग्राउंड कैनवास */
     #bgCanvas {
       position: fixed;
       top: 0;
@@ -79,36 +76,6 @@
       z-index: 0;
     }
 
-    /* फ्लोटिंग ग्रेडिएंट ब्लब्स */
-    .ambient-glow {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(100px);
-      pointer-events: none;
-      z-index: 0;
-      animation: floatGlow 15s ease-in-out infinite alternate;
-    }
-    .glow-1 {
-      width: 400px;
-      height: 400px;
-      background: var(--glow-color);
-      top: -100px;
-      left: 10%;
-    }
-    .glow-2 {
-      width: 350px;
-      height: 350px;
-      background: var(--glow-color);
-      bottom: 100px;
-      right: 5%;
-      animation-delay: -7s;
-    }
-    @keyframes floatGlow {
-      0% { transform: scale(1) translate(0, 0); }
-      100% { transform: scale(1.2) translate(50px, 40px); }
-    }
-
-    /* हेडर */
     header {
       background: var(--header-bg);
       border-bottom: 1px solid var(--border);
@@ -119,28 +86,18 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(14px);
     }
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
-      transition: transform 0.2s ease;
-    }
-    .brand:hover {
-      transform: scale(1.02);
     }
     .brand-logo-svg {
       width: 42px;
       height: 42px;
-      filter: drop-shadow(0 4px 10px rgba(37, 99, 235, 0.35));
-      animation: pulseLogo 4s infinite ease-in-out;
-    }
-    @keyframes pulseLogo {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
+      filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.25));
     }
     .brand-title {
       font-size: 19px;
@@ -176,19 +133,7 @@
       font-size: 12px;
       font-weight: 800;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
-      transition: all 0.2s ease;
     }
-    .btn-lang-toggle:hover {
-      background: var(--primary);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
-    }
-
     .theme-toggle-btn {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
@@ -198,10 +143,6 @@
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .theme-toggle-btn:hover {
-      transform: translateY(-2px);
     }
 
     .container {
@@ -217,16 +158,14 @@
 
     .hero-title {
       text-align: center;
-      animation: fadeInDown 0.8s ease backwards;
     }
     .hero-title h1 {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 900;
       margin-bottom: 6px;
-      letter-spacing: -0.5px;
     }
     .hero-title p {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-muted);
     }
     .quality-badge {
@@ -241,31 +180,21 @@
       padding: 6px 18px;
       border-radius: 30px;
       margin-top: 10px;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.15);
-      animation: badgeGlow 2.5s infinite alternate ease-in-out;
-    }
-    @keyframes badgeGlow {
-      0% { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15); }
-      100% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4); }
     }
 
-    /* कार्ड्स - ग्लासमोर्फिज्म */
     .card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 26px;
+      border-radius: 22px;
+      padding: 24px;
       box-shadow: var(--card-shadow);
-      backdrop-filter: blur(16px);
       position: relative;
-      animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
     }
 
-    /* अपलोड ड्रॉपज़ोन */
     .dropzone {
       position: relative;
       border: 2px dashed rgba(37, 99, 235, 0.4);
-      border-radius: 20px;
+      border-radius: 18px;
       padding: 50px 20px;
       text-align: center;
       cursor: pointer;
@@ -275,54 +204,21 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      gap: 10px;
     }
-    .dropzone:hover {
-      border-color: var(--primary);
-      transform: translateY(-3px);
-      box-shadow: 0 14px 30px -10px rgba(37, 99, 235, 0.25);
-    }
-    .dropzone::before {
-      content: '';
-      position: absolute;
-      inset: -50%;
-      background: conic-gradient(from 0deg, transparent, rgba(37, 99, 235, 0.25), transparent 60%);
-      animation: rotateGlow 3.5s linear infinite;
-      z-index: 0;
-      pointer-events: none;
-    }
-    @keyframes rotateGlow {
-      100% { transform: rotate(360deg); }
-    }
-    .dropzone-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
     .floating-icon-wrap {
-      width: 76px;
-      height: 76px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(2, 132, 199, 0.3));
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(2, 132, 199, 0.25));
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
-      border: 1px solid rgba(37, 99, 235, 0.3);
-      animation: floatIcon 3s ease-in-out infinite;
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+      margin-bottom: 10px;
+      border: 1px solid rgba(37, 99, 235, 0.25);
     }
-    @keyframes floatIcon {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
     .btn-browse {
-      margin-top: 12px;
+      margin-top: 10px;
       background: linear-gradient(135deg, var(--primary), #0284c7);
       border: none;
       color: #ffffff;
@@ -330,29 +226,23 @@
       border-radius: 25px;
       font-size: 13px;
       font-weight: 800;
-      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
-      transition: all 0.2s ease;
-    }
-    .btn-browse:hover {
-      transform: scale(1.04);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
 
-    /* HUD लोडिंग एनिमेशन */
+    /* HUD प्रोसेसिंग */
     .processing-overlay {
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 45px 20px;
+      padding: 50px 20px;
       gap: 16px;
       text-align: center;
-      animation: fadeIn 0.4s ease;
     }
     .hud-circle-wrap {
       position: relative;
-      width: 95px;
-      height: 95px;
+      width: 90px;
+      height: 90px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -363,13 +253,13 @@
       height: 100%;
       border-radius: 50%;
       border: 3px dashed var(--laser-color);
-      animation: spinHUD 1.8s linear infinite;
+      animation: spinHUD 1.5s linear infinite;
     }
     @keyframes spinHUD {
       100% { transform: rotate(360deg); }
     }
     .hud-percent {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
       color: var(--laser-color);
     }
@@ -378,18 +268,16 @@
       max-width: 320px;
       height: 8px;
       background: var(--bg-elevated);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
       border: 1px solid var(--border);
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .progress-bar-fill {
       width: 0%;
       height: 100%;
       background: linear-gradient(90deg, #2563eb, #0284c7, #10b981);
-      border-radius: 12px;
+      border-radius: 10px;
       transition: width 0.1s ease-out;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
     }
 
     /* वर्कस्पेस */
@@ -397,7 +285,6 @@
       display: none;
       flex-direction: column;
       gap: 20px;
-      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .workspace-top-bar {
@@ -406,10 +293,9 @@
       align-items: center;
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 12px 20px;
       box-shadow: var(--card-shadow);
-      backdrop-filter: blur(16px);
     }
     .file-name-indicator {
       font-size: 13px;
@@ -432,20 +318,17 @@
       font-size: 12px;
       font-weight: 800;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
     .btn-change-file:hover {
       background: var(--primary);
       color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
     .control-panel {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
+      border-radius: 16px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -469,18 +352,16 @@
       background: var(--bg-surface);
       border: 2px solid var(--border);
       padding: 6px 14px;
-      border-radius: 14px;
-      transition: all 0.2s ease;
+      border-radius: 12px;
     }
     .target-input-wrap:focus-within {
       border-color: var(--primary);
-      box-shadow: 0 0 14px rgba(37, 99, 235, 0.25);
     }
     .target-input {
       background: transparent;
       border: none;
       color: var(--text-main);
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 900;
       width: 75px;
       outline: none;
@@ -488,26 +369,18 @@
     }
     
     .btn-apply-size {
-      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      background: var(--primary);
       color: white;
       border: none;
-      padding: 9px 20px;
-      border-radius: 14px;
+      padding: 9px 18px;
+      border-radius: 12px;
       font-size: 13px;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
-      transition: all 0.2s ease;
-    }
-    .btn-apply-size:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.45);
-    }
-    .btn-apply-size:active {
-      transform: scale(0.96);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
     }
 
     .chips-group {
@@ -519,23 +392,17 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 7px 16px;
+      padding: 7px 15px;
       border-radius: 30px;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .chip-btn:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
     }
     .chip-btn.active {
       background: var(--primary);
       border-color: var(--primary);
       color: white;
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
-      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
 
     .preview-grid {
@@ -551,16 +418,12 @@
     .preview-box {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 14px;
       text-align: center;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      transition: transform 0.3s ease;
-    }
-    .preview-box:hover {
-      transform: translateY(-3px);
     }
     .preview-tag {
       font-size: 11px;
@@ -576,26 +439,21 @@
       align-items: center;
       justify-content: center;
       background: var(--preview-wrap);
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--border);
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     .preview-img-wrap img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      transition: transform 0.3s ease;
-    }
-    .preview-img-wrap:hover img {
-      transform: scale(1.02);
     }
 
     .dimension-badge {
       font-size: 11px;
       font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 10px;
+      padding: 4px 10px;
+      border-radius: 8px;
       background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-muted);
@@ -604,24 +462,21 @@
       justify-content: center;
       gap: 4px;
       align-self: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     }
 
     .status-banner {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 20px;
+      border-radius: 14px;
+      padding: 14px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     }
     .result-kb {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 900;
       color: var(--accent-green);
-      text-shadow: 0 2px 10px rgba(16, 185, 129, 0.25);
     }
 
     .btn-download {
@@ -629,7 +484,7 @@
       color: white;
       border: none;
       padding: 16px;
-      border-radius: 14px;
+      border-radius: 12px;
       font-size: 15px;
       font-weight: 800;
       cursor: pointer;
@@ -637,42 +492,32 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 10px 28px rgba(37, 99, 235, 0.35);
-      transition: all 0.25s ease;
-    }
-    .btn-download:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.5);
-    }
-    .btn-download:active {
-      transform: scale(0.98);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
     }
     .btn-download.success {
       background: linear-gradient(135deg, #10b981, #059669);
-      box-shadow: 0 10px 28px rgba(16, 185, 129, 0.4);
     }
 
-    /* डाउनलोड कम्प्लीशन टोस्ट (Visual Popup) */
+    /* डाउनलोड टोस्ट */
     .download-toast {
       position: fixed;
-      bottom: 30px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
       background: rgba(16, 185, 129, 0.95);
       color: #ffffff;
-      padding: 14px 28px;
-      border-radius: 40px;
+      padding: 12px 26px;
+      border-radius: 30px;
       font-size: 13px;
       font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 14px 35px rgba(16, 185, 129, 0.5);
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
       z-index: 300;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
       opacity: 0;
       pointer-events: none;
-      backdrop-filter: blur(10px);
     }
     .download-toast.show {
       transform: translateX(-50%) translateY(0);
@@ -684,38 +529,35 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(6px);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 250;
       padding: 20px;
-      animation: fadeIn 0.2s ease;
     }
     .custom-modal-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 22px;
+      border-radius: 20px;
       max-width: 460px;
       width: 100%;
-      padding: 26px;
+      padding: 24px;
       text-align: center;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-      animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      gap: 12px;
     }
     .modal-icon-badge {
-      width: 58px;
-      height: 58px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      font-size: 26px;
     }
     .badge-warn {
       background: rgba(245, 158, 11, 0.15);
@@ -737,24 +579,17 @@
       background: var(--primary);
       color: white;
       border: none;
-      padding: 10px 28px;
+      padding: 9px 24px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 800;
       cursor: pointer;
-      margin-top: 6px;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
-      transition: all 0.2s ease;
-    }
-    .btn-modal-ok:hover {
-      transform: translateY(-2px);
     }
 
-    /* फुटर */
     footer {
       background: #091224;
       border-top: 1px solid #1a263e;
-      padding: 40px 20px 25px;
+      padding: 35px 20px 25px;
       text-align: center;
       margin-top: auto;
       color: #94a3b8;
@@ -766,64 +601,49 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
       align-items: center;
     }
-    
     .footer-wa-card {
       background: linear-gradient(135deg, rgba(37, 211, 102, 0.12), rgba(16, 185, 129, 0.16));
       border: 1px solid rgba(37, 211, 102, 0.35);
-      border-radius: 20px;
-      padding: 22px 26px;
+      border-radius: 18px;
+      padding: 20px 24px;
       width: 100%;
       max-width: 650px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
       text-align: left;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
-    .footer-wa-card:hover {
-      transform: translateY(-3px);
     }
     .footer-wa-text h4 {
       color: #ffffff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .footer-wa-text p {
       color: #94a3b8;
       font-size: 12px;
-      line-height: 1.4;
     }
     .btn-footer-wa {
       background: #25d366;
       color: #ffffff;
       text-decoration: none;
-      padding: 10px 22px;
+      padding: 9px 20px;
       border-radius: 30px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+      gap: 6px;
       white-space: nowrap;
-      transition: all 0.2s ease;
     }
-    .btn-footer-wa:hover {
-      background: #1ebc57;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-    }
-
     .footer-brand {
       color: #ffffff;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
     }
     .footer-brand span {
@@ -832,7 +652,7 @@
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
     }
     .footer-links a {
@@ -840,41 +660,12 @@
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
-      transition: color 0.2s ease;
-    }
-    .footer-links a:hover {
-      color: #38bdf8;
-    }
-    .footer-copy {
-      font-size: 11px;
-      color: #64748b;
-    }
-
-    /* कीफ्रेम्स */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes scaleUp {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-  <!-- इंटरएक्टिव साइबर बैकग्राउंड -->
   <canvas id="bgCanvas"></canvas>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
 
   <header>
     <a href="index.html" class="brand">
@@ -890,7 +681,7 @@
       </svg>
       <div>
         <div class="brand-title">Nischay<span>Docs</span></div>
-        <div class="brand-sub" id="txtSubBrand">HD File Resizer</div>
+        <div class="brand-sub">HD File Resizer</div>
       </div>
     </a>
 
@@ -917,19 +708,17 @@
     <!-- अपलोड कार्ड -->
     <div class="card" id="uploadCard">
       <div class="dropzone" onclick="document.getElementById('fileInput').click()">
-        <div class="dropzone-content">
-          <div class="floating-icon-wrap">
-            <span style="font-size: 34px;">📄</span>
-          </div>
-          <h3 style="font-size: 17px; font-weight: 800;" id="txtDropTitle">डॉक्यूमेंट या फोटो चुनें</h3>
-          <p style="font-size: 12px; color: var(--text-muted);" id="txtDropSub">Samsung HEIC, JPG, PNG सभी फॉर्मेट्स तुरंत लोड होंगे</p>
-          <div class="btn-browse" id="txtBtnBrowse">फ़ाइल सेलेक्ट करें</div>
+        <div class="floating-icon-wrap">
+          <span style="font-size: 32px;">📄</span>
         </div>
+        <h3 style="font-size: 16px; font-weight: 800;" id="txtDropTitle">डॉक्यूमेंट या फोटो चुनें</h3>
+        <p style="font-size: 12px; color: var(--text-muted);" id="txtDropSub">Samsung HEIC, JPG, PNG सभी फॉर्मेट्स तुरंत लोड होंगे</p>
+        <div class="btn-browse" id="txtBtnBrowse">फ़ाइल सेलेक्ट करें</div>
         <input type="file" id="fileInput" accept="image/*, .heic, .HEIC, .heif, .HEIF" style="display: none;" onchange="handleImage(event)">
       </div>
     </div>
 
-    <!-- HUD लोडिंग एनिमेशन -->
+    <!-- HUD लोडिंग स्क्रीन -->
     <div class="card processing-overlay" id="processingBox">
       <div class="hud-circle-wrap">
         <div class="hud-ring"></div>
@@ -1029,7 +818,6 @@
 
   <footer>
     <div class="footer-content">
-      
       <div class="footer-wa-card">
         <div class="footer-wa-text">
           <h4 id="txtWaCardTitle">📚 बोर्ड परीक्षा व स्टडी के महत्वपूर्ण प्रश्न पाएं</h4>
@@ -1041,15 +829,14 @@
       </div>
 
       <div class="footer-brand">Nischay<span>Docs</span></div>
-      <p style="font-size: 12px; margin: 0;" id="txtFooterSub">छात्रों के लिए 100% मुफ़्त और सुरक्षित फ़ाइल रिसाइज़र</p>
+      <p style="font-size: 12px; margin: 0;">छात्रों के लिए 100% मुफ़्त और सुरक्षित फ़ाइल रिसाइज़र</p>
       
       <div class="footer-links">
-        <a href="index.html" id="linkMainTool">मुख्य रिसाइज़र टूल</a>
-        <a href="privacy.html" id="linkPrivacy">प्राइवेसी पॉलिसी</a>
-        <a href="terms.html" id="linkTerms">नियम व शर्तें</a>
+        <a href="index.html">मुख्य रिसाइज़र टूल</a>
+        <a href="privacy.html">प्राइवेसी पॉलिसी</a>
+        <a href="terms.html">नियम व शर्तें</a>
       </div>
-
-      <div class="footer-copy" id="txtFooterCopy">© 2026 Nischay Docs • सर्वाधिकार सुरक्षित</div>
+      <div style="font-size: 11px; color: #64748b;">© 2026 Nischay Docs • सर्वाधिकार सुरक्षित</div>
     </div>
   </footer>
 
@@ -1078,16 +865,10 @@
         docSafe: "सुरक्षित डॉक्यूमेंट",
         statusTitle: "✅ फ़ाइल सफलतापूर्वक रिसाइज़ हो गई!",
         btnDownload: "रिसाइज़्ड फ़ाइल डाउनलोड करें",
-        btnDownloaded: "डाउनलोड पूरा हुआ!",
         btnModalOk: "ठीक है",
         waCardTitle: "📚 बोर्ड परीक्षा व स्टडी के महत्वपूर्ण प्रश्न पाएं",
         waCardDesc: "हमारे आधिकारिक WhatsApp चैनल से जुड़ें और रोज़ाना उपयोगी प्रश्न व अपडेट सीधे प्राप्त करें।",
-        btnJoinWa: "WhatsApp चैनल से जुड़ें",
-        footerSub: "छात्रों के लिए 100% मुफ़्त और सुरक्षित फ़ाइल रिसाइज़र",
-        linkMainTool: "मुख्य रिसाइज़र टूल",
-        linkPrivacy: "प्राइवेसी पॉलिसी",
-        linkTerms: "नियम व शर्तें",
-        footerCopy: "© 2026 Nischay Docs • सर्वाधिकार सुरक्षित"
+        btnJoinWa: "WhatsApp चैनल से जुड़ें"
       },
       en: {
         langBtnLabel: "हिंदी",
@@ -1110,16 +891,10 @@
         docSafe: "Preserved Document",
         statusTitle: "✅ File Resized Successfully!",
         btnDownload: "Download Resized File",
-        btnDownloaded: "Download Complete!",
         btnModalOk: "Got it",
         waCardTitle: "📚 Get Important Exam & Study Questions",
         waCardDesc: "Join our official WhatsApp channel for daily practice questions and important study updates.",
-        btnJoinWa: "Join WhatsApp Channel",
-        footerSub: "100% Free & Secure File Resizer for Students",
-        linkMainTool: "Home Resizer",
-        linkPrivacy: "Privacy Policy",
-        linkTerms: "Terms of Service",
-        footerCopy: "© 2026 Nischay Docs • All Rights Reserved"
+        btnJoinWa: "Join WhatsApp Channel"
       }
     };
 
@@ -1151,14 +926,9 @@
       document.getElementById('txtWaCardTitle').innerText = d.waCardTitle;
       document.getElementById('txtWaCardDesc').innerText = d.waCardDesc;
       document.getElementById('txtBtnJoinWa').innerText = d.btnJoinWa;
-      document.getElementById('txtFooterSub').innerText = d.footerSub;
-      document.getElementById('linkMainTool').innerText = d.linkMainTool;
-      document.getElementById('linkPrivacy').innerText = d.linkPrivacy;
-      document.getElementById('linkTerms').innerText = d.linkTerms;
-      document.getElementById('txtFooterCopy').innerText = d.footerCopy;
     }
 
-    /* इंटरएक्टिव साइबर कैनवास पार्टिकल्स */
+    // साइबर पार्टिकल एनिमेशन
     const canvas = document.getElementById('bgCanvas');
     const ctx = canvas.getContext('2d');
     let particlesArray = [];
@@ -1195,8 +965,8 @@
 
     function initParticles() {
       particlesArray = [];
-      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 14000);
-      for (let i = 0; i < numberOfParticles; i++) {
+      const count = Math.floor((canvas.width * canvas.height) / 14000);
+      for (let i = 0; i < count; i++) {
         particlesArray.push(new Particle());
       }
     }
@@ -1253,13 +1023,8 @@
       const badge = document.getElementById('modalBadge');
       document.getElementById('modalMsg').innerText = currentLang === 'hi' ? msgHi : msgEn;
 
-      if (type === "info") {
-        badge.className = "modal-icon-badge badge-info";
-        badge.innerText = "ℹ️";
-      } else {
-        badge.className = "modal-icon-badge badge-warn";
-        badge.innerText = "⚠️";
-      }
+      badge.className = type === "info" ? "modal-icon-badge badge-info" : "modal-icon-badge badge-warn";
+      badge.innerText = type === "info" ? "ℹ️" : "⚠️";
       modal.style.display = "flex";
     }
 
@@ -1273,12 +1038,22 @@
       toast.classList.add('show');
       setTimeout(() => {
         toast.classList.remove('show');
-      }, 3200);
+      }, 3000);
     }
 
+    // 100% क्लीन अपलोड हैंडलर (पुराना डेटा तुरंत साफ़)
     async function handleImage(e) {
       let file = e.target.files[0];
       if (!file) return;
+
+      // 1. पुरानी इमेज का सारा कचरा तुरंत खाली करें
+      sourceImage = null;
+      finalBlob = null;
+      document.getElementById('origImg').src = '';
+      document.getElementById('compImg').src = '';
+      document.getElementById('finalKbDisplay').innerText = '-- KB';
+      document.getElementById('origDimBadge').innerText = '📐 0 × 0 px';
+      document.getElementById('compDimBadge').innerText = '📐 0 × 0 px';
 
       originalFileSize = file.size;
       document.getElementById('loadedFileName').innerText = file.name;
@@ -1286,6 +1061,7 @@
       const stepText = document.getElementById('stepText');
       
       document.getElementById('uploadCard').style.display = 'none';
+      document.getElementById('workspace').style.display = 'none'; // पिछला वर्कस्पेस तुरंत छुपाएं
       pBox.style.display = 'flex';
 
       const fileName = file.name.toLowerCase();
@@ -1299,10 +1075,7 @@
           });
           file = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
         } catch (err) {
-          showAlertModal(
-            "फ़ाइल लोड नहीं हो सकी, कृपया सामान्य JPG फ़ाइल चुनें।",
-            "Could not load HEIC file, please choose a standard JPG file."
-          );
+          showAlertModal("फ़ाइल लोड नहीं हो सकी, कृपया JPG चुनें।", "Could not load file, choose JPG.");
           resetTool();
           return;
         }
@@ -1333,16 +1106,16 @@
       let progress = 0;
 
       const interval = setInterval(() => {
-        progress += 8;
+        progress += 10;
         if (progress > 100) progress = 100;
         
         bar.style.width = progress + '%';
         hudCount.innerText = progress + '%';
 
         if (progress === 40) {
-          stepText.innerText = currentLang === 'hi' ? "रिज़ॉल्यूशन और क्लैरिटी सेट हो रही है..." : "Optimizing clarity & sharpness...";
+          stepText.innerText = currentLang === 'hi' ? "क्लैरिटी और रिज़ॉल्यूशन सेट हो रहा है..." : "Optimizing sharpness...";
         } else if (progress === 80) {
-          stepText.innerText = currentLang === 'hi' ? "टारगेट साइज में फाइल तैयार की जा रही है..." : "Locking strict target KB...";
+          stepText.innerText = currentLang === 'hi' ? "सटीक KB में फ़ाइल तैयार हो रही है..." : "Locking target KB...";
         }
 
         if (progress >= 100) {
@@ -1361,6 +1134,9 @@
       document.getElementById('targetKbInput').value = kb;
       document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      
+      // तुरंत स्क्रीन अपडेट
+      document.getElementById('finalKbDisplay').innerText = "⏳...";
       processPureResizing();
     }
 
@@ -1391,7 +1167,7 @@
       if (origKb < val) {
         showAlertModal(
           `आपकी फ़ाइल पहले से ही ${origKb.toFixed(1)} KB की है। इसे बड़ा (${val} KB) करने से क्वालिटी नहीं बढ़ती, इसलिए इसे मूल बेस्ट क्वालिटी में सेव किया गया।`,
-          `Your source file is already ${origKb.toFixed(1)} KB. Increasing to ${val} KB won't increase quality; kept at original HD quality.`,
+          `Your source file is already ${origKb.toFixed(1)} KB. Kept at original HD quality.`,
           "info"
         );
       }
@@ -1401,6 +1177,7 @@
       
       const btn = document.getElementById('txtBtnApply');
       btn.innerText = "⏳ ...";
+      document.getElementById('finalKbDisplay').innerText = "⏳...";
       setTimeout(() => {
         processPureResizing().then(() => {
           btn.innerText = currentLang === 'hi' ? "⚡ रिसाइज़ करें" : "⚡ Resize Now";
@@ -1408,6 +1185,7 @@
       }, 50);
     }
 
+    // शुद्ध JPG रिसाइज़िंग इंजन
     async function processPureResizing() {
       if (!sourceImage) return;
 
@@ -1450,6 +1228,7 @@
       }
       finalBlob = bestUnderTargetBlob || fallbackBlob;
 
+      // साफ़ नया URL बनाएँ ताकि पुराना कैश न दिखे
       const resultUrl = URL.createObjectURL(finalBlob);
       document.getElementById('compImg').src = resultUrl;
       const resultKb = (finalBlob.size / 1024).toFixed(1);
@@ -1470,7 +1249,7 @@
       btnText.innerText = currentLang === 'hi' ? "डाउनलोड पूरा हुआ!" : "Download Complete!";
 
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 85, spread: 70, origin: { y: 0.65 } });
+        confetti({ particleCount: 75, spread: 65, origin: { y: 0.65 } });
       }
 
       showDownloadToast(
@@ -1483,7 +1262,7 @@
       const link = document.createElement('a');
       link.style.display = 'none';
       link.href = fileUrl;
-      link.download = `NischayDocs_Resized_${targetKB}KB.jpg`;
+      link.download = `NischayDocs_${targetKB}KB_${Date.now()}.jpg`;
       
       document.body.appendChild(link);
       link.click();
@@ -1499,6 +1278,7 @@
 
     function resetTool() {
       sourceImage = null;
+      finalBlob = null;
       document.getElementById('fileInput').value = '';
       document.getElementById('uploadCard').style.display = 'block';
       document.getElementById('workspace').style.display = 'none';
