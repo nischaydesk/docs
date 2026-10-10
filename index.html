@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nischay Docs - अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- फास्ट HEIC और कॉन्फ़ेटी इंजन -->
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root[data-theme="light"] {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-elevated: #f1f5f9;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --header-bg: rgba(255, 255, 255, 0.88);
+      --card-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
+      --laser-color: #0284c7;
+      --preview-wrap: #e2e8f0;
+    }
+
+    :root[data-theme="dark"] {
+      --bg-base: #070b14;
+      --bg-surface: #0f172a;
+      --bg-elevated: #1e293b;
+      --border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --header-bg: rgba(15, 23, 42, 0.88);
+      --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      --laser-color: #38bdf8;
+      --preview-wrap: #050811;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --accent-green: #10b981;
+      --whatsapp-green: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-logo-svg {
+      width: 42px;
+      height: 42px;
+      filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.25));
+    }
+    .brand-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+    .brand-title span {
+      background: linear-gradient(135deg, #2563eb, #0284c7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-sub {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-lang-toggle {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+    }
+    .btn-lang-toggle:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 960px;
+      width: 92%;
+      margin: 25px auto 45px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      text-align: center;
+    }
+    .hero-title h1 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .hero-title p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .quality-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--accent-green);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 16px;
+      border-radius: 30px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .dropzone {
+      position: relative;
+      border: 2px dashed var(--border);
+      border-radius: 18px;
+      padding: 45px 20px;
+      text-align: center;
+      cursor: pointer;
+      background: var(--bg-elevated);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .dropzone::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: conic-gradient(from 0deg, transparent, rgba(37, 99, 235, 0.22), transparent 60%);
+      animation: rotateGlow 4s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+    @keyframes rotateGlow {
+      100% { transform: rotate(360deg); }
+    }
+    .dropzone-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .floating-icon-wrap {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(2, 132, 199, 0.25));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    .btn-browse {
+      margin-top: 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 7px 20px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .processing-overlay {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 45px 20px;
+      gap: 16px;
+      text-align: center;
+    }
+    .hud-circle-wrap {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hud-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px dashed var(--laser-color);
+      animation: spinHUD 2s linear infinite;
+    }
+    @keyframes spinHUD {
+      100% { transform: rotate(360deg); }
+    }
+    .hud-percent {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--laser-color);
+    }
+    .progress-bar-wrap {
+      width: 100%;
+      max-width: 320px;
+      height: 7px;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #0284c7, #10b981);
+      border-radius: 10px;
+      transition: width 0.1s ease-out;
+    }
+
+    .workspace {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .workspace-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 20px;
+      box-shadow: var(--card-shadow);
+    }
+    .file-name-indicator {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 60%;
+    }
+    .btn-change-file {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .btn-change-file:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .control-panel {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .target-box-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .target-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface);
+      border: 2px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 12px;
+    }
+    .target-input-wrap:focus-within {
+      border-color: var(--primary);
+    }
+    .target-input {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: 19px;
+      font-weight: 900;
+      width: 75px;
+      outline: none;
+      text-align: right;
+    }
+    
+    .btn-apply-size {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+    .btn-apply-size:hover {
+      background: #1d4ed8;
+    }
+    .btn-apply-size:active {
+      transform: scale(0.96);
+    }
+
+    .chips-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chip-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 7px 15px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .chip-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 620px) {
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .preview-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .preview-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+    .preview-img-wrap {
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--preview-wrap);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .preview-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .dimension-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      align-self: center;
+    }
+
+    .status-banner {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .result-kb {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--accent-green);
+    }
+
+    .btn-download {
+      background: linear-gradient(135deg, #2563eb, #0284c7);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+    }
+    .btn-download.success {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    .custom-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 250;
+      padding: 20px;
+    }
+    .custom-modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 460px;
+      width: 100%;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .modal-icon-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+    .badge-warn {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #f59e0b;
+    }
+    .badge-info {
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(37, 99, 235, 0.35);
+      color: #38bdf8;
+    }
+    .modal-msg {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+    .btn-modal-ok {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 9px 24px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    footer {
+      background: #091224;
+      border-top: 1px solid #1a263e;
+      padding: 40px 20px 25px;
+      text-align: center;
+      margin-top: auto;
+      color: #94a3b8;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .footer-wa-card {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.12), rgba(16, 185, 129, 0.16));
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      border-radius: 20px;
+      padding: 22px 26px;
+      width: 100%;
+      max-width: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      text-align: left;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .footer-wa-text h4 {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .footer-wa-text p {
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .btn-footer-wa {
+      background: #25d366;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+      white-space: nowrap;
+    }
+    .btn-footer-wa:hover {
+      background: #1ebc57;
+      transform: translateY(-2px);
+    }
+
+    .footer-brand {
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .footer-brand span {
+      color: #38bdf8;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .footer-links a:hover {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <header>
+    <a href="index.html" class="brand">
+      <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="48" fill="#ffffff" stroke="#cbd5e1" stroke-width="2.5"/>
+        <rect x="28" y="24" width="36" height="44" rx="5" fill="#2563eb"/>
+        <path d="M50 24L64 38H54C51.8 38 50 36.2 50 34V24Z" fill="#1d4ed8"/>
+        <line x1="34" y1="42" x2="45" y2="42" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="34" y1="49" x2="56" y2="49" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="34" y1="56" x2="48" y2="56" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="64" cy="64" r="14" fill="#059669" stroke="#ffffff" stroke-width="2.5"/>
+        <path d="M58 64L62 68L70 60" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <div class="brand-title">Nischay<span>Docs</span></div>
+        <div class="brand-sub" id="txtSubBrand">HD File Resizer</div>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <button class="btn-lang-toggle" onclick="toggleLanguage()" id="langBtn">
+        🌐 <span id="langLabel">English</span>
+      </button>
+
+      <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
+        🌙 <span>Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero-title">
+      <h1 id="txtHeroTitle">अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र</h1>
+      <p id="txtHeroDesc">पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।</p>
+      <div class="quality-badge" id="txtQualityBadge">
+        ✨ 100% फुल डॉक्यूमेंट (टारगेट KB से कभी अधिक नहीं)
+      </div>
+    </div>
+
+    <!-- अपलोड कार्ड -->
+    <div class="card" id="uploadCard">
+      <div class="dropzone" onclick="document.getElementById('fileInput').click()">
+        <div class="dropzone-content">
+          <div class="floating-icon-wrap">
+            <span style="font-size: 32px;">📄</span>
+          </div>
+          <h3 style="font-size: 16px; font-weight: 800;" id="txtDropTitle">डॉक्यूमेंट या फोटो चुनें</h3>
+          <p style="font-size: 12px; color: var(--text-muted);" id="txtDropSub">Samsung HEIC, JPG, PNG सभी फॉर्मेट्स तुरंत लोड होंगे</p>
+          <div class="btn-browse" id="txtBtnBrowse">फ़ाइल सेलेक्ट करें</div>
+        </div>
+        <input type="file" id="fileInput" accept="image/*, .heic, .HEIC, .heif, .HEIF" style="display: none;" onchange="handleImage(event)">
+      </div>
+    </div>
+
+    <!-- HUD प्रोसेसिंग -->
+    <div class="card processing-overlay" id="processingBox">
+      <div class="hud-circle-wrap">
+        <div class="hud-ring"></div>
+        <div class="hud-percent" id="hudCount">0%</div>
+      </div>
+      <h3 id="stepText" style="font-size: 15px; font-weight: 800;">फ़ाइल प्रोसेस हो रही है...</h3>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+    </div>
+
+    <!-- एक्टिव वर्कस्पेस -->
+    <div class="workspace" id="workspace">
+      
+      <!-- टॉप बार -->
+      <div class="workspace-top-bar">
+        <div class="file-name-indicator" id="fileNameIndicator">
+          <span>📄</span> <span id="loadedFileName">document.jpg</span>
+        </div>
+        <button class="btn-change-file" onclick="resetTool()" id="txtBtnChangeFile">
+          🔄 दूसरी फ़ाइल चुनें
+        </button>
+      </div>
+
+      <div class="control-panel">
+        <div class="input-row">
+          <div style="font-size: 13px; font-weight: 800;" id="txtTargetLabel">टारगेट साइज़ सेट करें:</div>
+          <div class="target-box-group">
+            <div class="target-input-wrap">
+              <input type="number" id="targetKbInput" class="target-input" value="100" min="10" max="500">
+              <span style="font-size: 13px; font-weight: 900; color: #0284c7;">KB</span>
+            </div>
+            <button class="btn-apply-size" onclick="applyCustomTargetKb()" id="txtBtnApply">
+              ⚡ रिसाइज़ करें
+            </button>
+          </div>
+        </div>
+
+        <div class="chips-group">
+          <button class="chip-btn" onclick="setPreset(15, this)" id="chip1">15 KB (साइन)</button>
+          <button class="chip-btn" onclick="setPreset(35, this)" id="chip2">35 KB (फोटो)</button>
+          <button class="chip-btn active" onclick="setPreset(100, this)" id="chip3">100 KB (मार्कशीट)</button>
+          <button class="chip-btn" onclick="setPreset(200, this)" id="chip4">200 KB (सरकारी फॉर्म)</button>
+          <button class="chip-btn" onclick="setPreset(300, this)" id="chip5">300 KB (हाई क्वालिटी)</button>
+        </div>
+      </div>
+
+      <div class="preview-grid">
+        <div class="preview-box">
+          <div class="preview-tag">
+            <span id="txtOrigTag">ओरिजिनल फ़ाइल</span>
+            <span id="origSizeLabel">-- MB</span>
+          </div>
+          <div class="preview-img-wrap">
+            <img id="origImg" alt="Original">
+          </div>
+          <div class="dimension-badge" id="origDimBadge">📐 0 × 0 px</div>
+        </div>
+
+        <div class="preview-box">
+          <div class="preview-tag">
+            <span id="txtResizedTag">रिसाइज़्ड आउटपुट (तैयार)</span>
+            <span style="color: var(--accent-green);" id="txtDocSafe">सुरक्षित डॉक्यूमेंट</span>
+          </div>
+          <div class="preview-img-wrap">
+            <img id="compImg" alt="Compressed">
+          </div>
+          <div class="dimension-badge" id="compDimBadge" style="color: var(--primary);">📐 0 × 0 px</div>
+        </div>
+      </div>
+
+      <div class="status-banner">
+        <div>
+          <h4 id="statusTitle" style="font-size: 14px; font-weight: 800;">✅ फ़ाइल सफलतापूर्वक रिसाइज़ हो गई!</h4>
+          <p id="statusDesc" style="font-size: 11px; color: var(--text-muted);">सभी अक्षर और नंबर बिल्कुल साफ़ रहेंगे</p>
+        </div>
+        <div class="result-kb" id="finalKbDisplay">-- KB</div>
+      </div>
+
+      <button class="btn-download" id="downloadBtn" onclick="triggerDownload()">
+        <span id="btnIcon">📥</span> <span id="btnText">रिसाइज़्ड फ़ाइल डाउनलोड करें</span>
+      </button>
+
+    </div>
+  </main>
+
+  <div class="custom-modal-backdrop" id="alertModal">
+    <div class="custom-modal-card">
+      <div class="modal-icon-badge badge-warn" id="modalBadge">⚠️</div>
+      <div class="modal-msg" id="modalMsg">संदेश यहाँ आएगा</div>
+      <button class="btn-modal-ok" onclick="closeAlertModal()" id="btnModalOk">ठीक है</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      
+      <div class="footer-wa-card">
+        <div class="footer-wa-text">
+          <h4 id="txtWaCardTitle">📚 बोर्ड परीक्षा व स्टडी के महत्वपूर्ण प्रश्न पाएं</h4>
+          <p id="txtWaCardDesc">हमारे आधिकारिक WhatsApp चैनल से जुड़ें और रोज़ाना उपयोगी प्रश्न व अपडेट सीधे प्राप्त करें।</p>
+        </div>
+        <a href="https://whatsapp.com/channel/0029VbDgXJG0lwgytlQMHP0I" target="_blank" class="btn-footer-wa">
+          🟢 <span id="txtBtnJoinWa">WhatsApp चैनल से जुड़ें</span>
+        </a>
+      </div>
+
+      <div class="footer-brand">Nischay<span>Docs</span></div>
+      <p style="font-size: 12px; margin: 0;" id="txtFooterSub">छात्रों के लिए 100% मुफ़्त और सुरक्षित फ़ाइल रिसाइज़र</p>
+      
+      <div class="footer-links">
+        <a href="index.html" id="linkMainTool">मुख्य रिसाइज़र टूल</a>
+        <a href="privacy.html" id="linkPrivacy">प्राइवेसी पॉलिसी</a>
+        <a href="terms.html" id="linkTerms">नियम व शर्तें</a>
+      </div>
+
+      <div class="footer-copy" id="txtFooterCopy">© 2026 Nischay Docs • सर्वाधिकार सुरक्षित</div>
+    </div>
+  </footer>
+
+  <script>
+    let currentLang = 'hi';
+
+    const langData = {
+      hi: {
+        langBtnLabel: "English",
+        heroTitle: "अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र",
+        heroDesc: "पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।",
+        qualityBadge: "✨ 100% फुल डॉक्यूमेंट (टारगेट KB से कभी अधिक नहीं)",
+        dropTitle: "डॉक्यूमेंट या फोटो चुनें",
+        dropSub: "Samsung HEIC, JPG, PNG सभी फॉर्मेट्स तुरंत लोड होंगे",
+        btnBrowse: "फ़ाइल सेलेक्ट करें",
+        btnChangeFile: "🔄 दूसरी फ़ाइल चुनें",
+        targetLabel: "टारगेट साइज़ सेट करें:",
+        btnApply: "⚡ रिसाइज़ करें",
+        chip1: "15 KB (साइन)",
+        chip2: "35 KB (फोटो)",
+        chip3: "100 KB (मार्कशीट)",
+        chip4: "200 KB (सरकारी फॉर्म)",
+        chip5: "300 KB (हाई क्वालिटी)",
+        origTag: "ओरिजिनल फ़ाइल",
+        resizedTag: "रिसाइज़्ड आउटपुट (तैयार)",
+        docSafe: "सुरक्षित डॉक्यूमेंट",
+        statusTitle: "✅ फ़ाइल सफलतापूर्वक रिसाइज़ हो गई!",
+        btnDownload: "रिसाइज़्ड फ़ाइल डाउनलोड करें",
+        btnDownloaded: "डाउनलोड पूरा हुआ!",
+        btnModalOk: "ठीक है",
+        waCardTitle: "📚 बोर्ड परीक्षा व स्टडी के महत्वपूर्ण प्रश्न पाएं",
+        waCardDesc: "हमारे आधिकारिक WhatsApp चैनल से जुड़ें और रोज़ाना उपयोगी प्रश्न व अपडेट सीधे प्राप्त करें।",
+        btnJoinWa: "WhatsApp चैनल से जुड़ें",
+        footerSub: "छात्रों के लिए 100% मुफ़्त और सुरक्षित फ़ाइल रिसाइज़र",
+        linkMainTool: "मुख्य रिसाइज़र टूल",
+        linkPrivacy: "प्राइवेसी पॉलिसी",
+        linkTerms: "नियम व शर्तें",
+        footerCopy: "© 2026 Nischay Docs • सर्वाधिकार सुरक्षित"
+      },
+      en: {
+        langBtnLabel: "हिंदी",
+        heroTitle: "Ultra HD Photo & Document Resizer",
+        heroDesc: "100% Full Document Preservation (No Cropping). Compress to exact KB without pixel blur.",
+        qualityBadge: "✨ 100% Full Document (Never exceeds target KB)",
+        dropTitle: "Select Document or Photo",
+        dropSub: "Samsung HEIC, JPG, PNG formats load instantly",
+        btnBrowse: "Browse File",
+        btnChangeFile: "🔄 Choose Another File",
+        targetLabel: "Set Target File Size:",
+        btnApply: "⚡ Resize Now",
+        chip1: "15 KB (Signature)",
+        chip2: "35 KB (Photo)",
+        chip3: "100 KB (Marksheet)",
+        chip4: "200 KB (Govt Forms)",
+        chip5: "300 KB (High Quality)",
+        origTag: "Original File",
+        resizedTag: "Resized Output (Ready)",
+        docSafe: "Preserved Document",
+        statusTitle: "✅ File Resized Successfully!",
+        btnDownload: "Download Resized File",
+        btnDownloaded: "Download Complete!",
+        btnModalOk: "Got it",
+        waCardTitle: "📚 Get Important Exam & Study Questions",
+        waCardDesc: "Join our official WhatsApp channel for daily practice questions and important study updates.",
+        btnJoinWa: "Join WhatsApp Channel",
+        footerSub: "100% Free & Secure File Resizer for Students",
+        linkMainTool: "Home Resizer",
+        linkPrivacy: "Privacy Policy",
+        linkTerms: "Terms of Service",
+        footerCopy: "© 2026 Nischay Docs • All Rights Reserved"
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'hi' ? 'en' : 'hi';
+      const d = langData[currentLang];
+
+      document.getElementById('langLabel').innerText = d.langBtnLabel;
+      document.getElementById('txtHeroTitle').innerText = d.heroTitle;
+      document.getElementById('txtHeroDesc').innerText = d.heroDesc;
+      document.getElementById('txtQualityBadge').innerText = d.qualityBadge;
+      document.getElementById('txtDropTitle').innerText = d.dropTitle;
+      document.getElementById('txtDropSub').innerText = d.dropSub;
+      document.getElementById('txtBtnBrowse').innerText = d.btnBrowse;
+      document.getElementById('txtBtnChangeFile').innerText = d.btnChangeFile;
+      document.getElementById('txtTargetLabel').innerText = d.targetLabel;
+      document.getElementById('txtBtnApply').innerText = d.btnApply;
+      document.getElementById('chip1').innerText = d.chip1;
+      document.getElementById('chip2').innerText = d.chip2;
+      document.getElementById('chip3').innerText = d.chip3;
+      document.getElementById('chip4').innerText = d.chip4;
+      document.getElementById('chip5').innerText = d.chip5;
+      document.getElementById('txtOrigTag').innerText = d.origTag;
+      document.getElementById('txtResizedTag').innerText = d.resizedTag;
+      document.getElementById('txtDocSafe').innerText = d.docSafe;
+      document.getElementById('statusTitle').innerText = d.statusTitle;
+      document.getElementById('btnText').innerText = d.btnDownload;
+      document.getElementById('btnModalOk').innerText = d.btnModalOk;
+      document.getElementById('txtWaCardTitle').innerText = d.waCardTitle;
+      document.getElementById('txtWaCardDesc').innerText = d.waCardDesc;
+      document.getElementById('txtBtnJoinWa').innerText = d.btnJoinWa;
+      document.getElementById('txtFooterSub').innerText = d.footerSub;
+      document.getElementById('linkMainTool').innerText = d.linkMainTool;
+      document.getElementById('linkPrivacy').innerText = d.linkPrivacy;
+      document.getElementById('linkTerms').innerText = d.linkTerms;
+      document.getElementById('txtFooterCopy').innerText = d.footerCopy;
+    }
+
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      draw() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        ctx.fillStyle = isDark ? 'rgba(56, 189, 248, 0.45)' : 'rgba(37, 99, 235, 0.3)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 16000);
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function connectParticles() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const lineColor = isDark ? 'rgba(56, 189, 248, 0.12)' : 'rgba(37, 99, 235, 0.08)';
+
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          const dx = particlesArray[a].x - particlesArray[b].x;
+          const dy = particlesArray[a].y - particlesArray[b].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 110) {
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+      }
+      connectParticles();
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    let sourceImage = null;
+    let originalFileSize = 0;
+    let finalBlob = null;
+    let targetKB = 100;
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const targetTheme = isDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', targetTheme);
+      document.getElementById('themeBtn').innerHTML = targetTheme === 'dark' ? '☀️ <span>Light Mode</span>' : '🌙 <span>Dark Mode</span>';
+    }
+
+    function showAlertModal(msgHi, msgEn, type = "warn") {
+      const modal = document.getElementById('alertModal');
+      const badge = document.getElementById('modalBadge');
+      document.getElementById('modalMsg').innerText = currentLang === 'hi' ? msgHi : msgEn;
+
+      if (type === "info") {
+        badge.className = "modal-icon-badge badge-info";
+        badge.innerText = "ℹ️";
+      } else {
+        badge.className = "modal-icon-badge badge-warn";
+        badge.innerText = "⚠️";
+      }
+      modal.style.display = "flex";
+    }
+
+    function closeAlertModal() {
+      document.getElementById('alertModal').style.display = "none";
+    }
+
+    async function handleImage(e) {
+      let file = e.target.files[0];
+      if (!file) return;
+
+      originalFileSize = file.size;
+      document.getElementById('loadedFileName').innerText = file.name;
+      const pBox = document.getElementById('processingBox');
+      const stepText = document.getElementById('stepText');
+      
+      document.getElementById('uploadCard').style.display = 'none';
+      pBox.style.display = 'flex';
+
+      const fileName = file.name.toLowerCase();
+      if (fileName.endsWith('.heic') || fileName.endsWith('.heif') || file.type.includes('heic')) {
+        stepText.innerText = currentLang === 'hi' ? "HEIC फ़ाइल कन्वर्ट हो रही है..." : "Converting HEIC file...";
+        try {
+          const convertedBlob = await heic2any({
+            blob: file,
+            toType: "image/jpeg",
+            quality: 0.90
+          });
+          file = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
+        } catch (err) {
+          showAlertModal(
+            "फ़ाइल लोड नहीं हो सकी, कृपया सामान्य JPG फ़ाइल चुनें।",
+            "Could not load HEIC file, please choose a standard JPG file."
+          );
+          resetTool();
+          return;
+        }
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          sourceImage = img;
+          document.getElementById('origImg').src = img.src;
+          document.getElementById('origSizeLabel').innerText = (originalFileSize / (1024 * 1024)).toFixed(2) + ' MB';
+          document.getElementById('origDimBadge').innerText = `📐 ${img.width} × ${img.height} px`;
+          runAiAnimation();
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function runAiAnimation() {
+      const pBox = document.getElementById('processingBox');
+      const bar = document.getElementById('progressBar');
+      const hudCount = document.getElementById('hudCount');
+      const stepText = document.getElementById('stepText');
+      
+      bar.style.width = '0%';
+      let progress = 0;
+
+      const interval = setInterval(() => {
+        progress += 8;
+        if (progress > 100) progress = 100;
+        
+        bar.style.width = progress + '%';
+        hudCount.innerText = progress + '%';
+
+        if (progress === 40) {
+          stepText.innerText = currentLang === 'hi' ? "रिज़ॉल्यूशन और क्लैरिटी सेट हो रही है..." : "Optimizing clarity & sharpness...";
+        } else if (progress === 80) {
+          stepText.innerText = currentLang === 'hi' ? "टारगेट साइज में फाइल तैयार की जा रही है..." : "Locking strict target KB...";
+        }
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            pBox.style.display = 'none';
+            document.getElementById('workspace').style.display = 'flex';
+            processPureResizing();
+          }, 150);
+        }
+      }, 30);
+    }
+
+    function setPreset(kb, btn) {
+      targetKB = kb;
+      document.getElementById('targetKbInput').value = kb;
+      document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      processPureResizing();
+    }
+
+    function applyCustomTargetKb() {
+      const val = parseInt(document.getElementById('targetKbInput').value);
+
+      if (val > 500) {
+        showAlertModal(
+          "कृपया 10 KB से 500 KB के बीच का साइज़ दर्ज करें। सरकारी फॉर्म्स में 500 KB से अधिक मान्य नहीं होता।",
+          "Please enter between 10 KB and 500 KB. Portals do not accept files above 500 KB."
+        );
+        document.getElementById('targetKbInput').value = 500;
+        targetKB = 500;
+        return;
+      }
+
+      if (val < 10 || isNaN(val)) {
+        showAlertModal(
+          "न्यूनतम साइज़ 10 KB होना चाहिए ताकि लिखावट साफ़ रहे।",
+          "Minimum allowed size is 10 KB to preserve legibility."
+        );
+        document.getElementById('targetKbInput').value = 10;
+        targetKB = 10;
+        return;
+      }
+
+      const origKb = originalFileSize / 1024;
+      if (origKb < val) {
+        showAlertModal(
+          `आपकी फ़ाइल पहले से ही ${origKb.toFixed(1)} KB की है। इसे बड़ा (${val} KB) करने से क्वालिटी नहीं बढ़ती, इसलिए इसे मूल बेस्ट क्वालिटी में सेव किया गया।`,
+          `Your source file is already ${origKb.toFixed(1)} KB. Increasing to ${val} KB won't increase quality; kept at original HD quality.`,
+          "info"
+        );
+      }
+
+      targetKB = val;
+      document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+      
+      const btn = document.getElementById('txtBtnApply');
+      btn.innerText = "⏳ ...";
+      setTimeout(() => {
+        processPureResizing().then(() => {
+          btn.innerText = currentLang === 'hi' ? "⚡ रिसाइज़ करें" : "⚡ Resize Now";
+        });
+      }, 50);
+    }
+
+    // 100% शुद्ध JPG/JPEG इंजन (सख्त बाइनरी सर्च)
+    async function processPureResizing() {
+      if (!sourceImage) return;
+
+      let targetWidth = targetKB >= 80 ? 1200 : 700;
+      let targetHeight = Math.round((sourceImage.height / sourceImage.width) * targetWidth);
+
+      if (sourceImage.width < targetWidth) {
+        targetWidth = sourceImage.width;
+        targetHeight = sourceImage.height;
+      }
+
+      const offCanvas = document.createElement('canvas');
+      offCanvas.width = targetWidth;
+      offCanvas.height = targetHeight;
+      const offCtx = offCanvas.getContext('2d');
+      offCtx.imageSmoothingEnabled = true;
+      offCtx.imageSmoothingQuality = 'high';
+      offCtx.drawImage(sourceImage, 0, 0, targetWidth, targetHeight);
+
+      document.getElementById('compDimBadge').innerText = `📐 ${targetWidth} × ${targetHeight} px`;
+
+      let low = 0.05;
+      let high = 0.98;
+      let bestUnderTargetBlob = null;
+      let fallbackBlob = null;
+
+      for (let i = 0; i < 10; i++) {
+        const mid = (low + high) / 2;
+        const blob = await new Promise(resolve => offCanvas.toBlob(resolve, 'image/jpeg', mid));
+        const currentKb = blob.size / 1024;
+
+        fallbackBlob = blob;
+
+        if (currentKb <= targetKB) {
+          bestUnderTargetBlob = blob;
+          low = mid;
+        } else {
+          high = mid;
+        }
+      }
+      finalBlob = bestUnderTargetBlob || fallbackBlob;
+
+      const resultUrl = URL.createObjectURL(finalBlob);
+      document.getElementById('compImg').src = resultUrl;
+      const resultKb = (finalBlob.size / 1024).toFixed(1);
+      document.getElementById('finalKbDisplay').innerText = `${resultKb} KB`;
+      document.getElementById('statusDesc').innerText = currentLang === 'hi'
+        ? `टारगेट: ${targetKB} KB | तैयार: ${resultKb} KB (JPG सुरक्षित सीमा)`
+        : `Target: ${targetKB} KB | Ready: ${resultKb} KB (JPG Safe Limit)`;
+    }
+
+    function triggerDownload() {
+      if (!finalBlob) return;
+      const btn = document.getElementById('downloadBtn');
+      const btnIcon = document.getElementById('btnIcon');
+      const btnText = document.getElementById('btnText');
+
+      btn.classList.add('success');
+      btnIcon.innerText = "✓";
+      btnText.innerText = currentLang === 'hi' ? "डाउनलोड पूरा हुआ!" : "Download Complete!";
+
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 75, spread: 65, origin: { y: 0.65 } });
+      }
+
+      const fileUrl = window.URL.createObjectURL(finalBlob);
+      const link = document.createElement('a');
+      link.style.display = 'none';
+      link.href = fileUrl;
+      link.download = `NischayDocs_Resized_${targetKB}KB.jpg`;
+      
+      document.body.appendChild(link);
+      link.click();
+      
+      setTimeout(() => {
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(fileUrl);
+        btn.classList.remove('success');
+        btnIcon.innerText = "📥";
+        btnText.innerText = currentLang === 'hi' ? "रिसाइज़्ड फ़ाइल डाउनलोड करें" : "Download Resized File";
+      }, 2000);
+    }
+
+    function resetTool() {
+      sourceImage = null;
+      document.getElementById('fileInput').value = '';
+      document.getElementById('uploadCard').style.display = 'block';
+      document.getElementById('workspace').style.display = 'none';
+      document.getElementById('processingBox').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
