@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <!-- SEO & Share Tags -->
   <meta name="description" content="Nischay Docs - बिहार बोर्ड और सभी सरकारी परीक्षाओं (BSEB, SSC, Railway) के लिए मुफ्त और अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र। 100% सुरक्षित और सटीक KB।">
   <meta name="keywords" content="Nischay Docs, Photo Resizer, Document Resizer, BSEB photo size, Bihar Board admit card photo resize, 20kb photo converter, 100kb document compress">
   <meta name="author" content="Prince Kumar">
@@ -25,7 +26,7 @@
   <meta name="twitter:image" content="https://nischaydesk.github.io/docs/preview.png">
   <meta name="google-site-verification" content="uSCJGPNxrZ23LYmb3FsgLqdXYBZGGE1x8FDAyr-WSis" />
 
-  <!-- HEIC कन्वर्टर और कॉन्फ़ेटी इंजन -->
+  <!-- HEIC लाइब्रेरी और कॉन्फ़ेटी -->
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -252,7 +253,6 @@
       box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
 
-    /* फ़ॉर्मेट्स बैज स्ट्रिप */
     .supported-formats-strip {
       display: flex;
       flex-wrap: wrap;
@@ -534,17 +534,10 @@
       transition: filter 0.25s ease, transform 0.25s ease;
     }
 
-    /* रीसाइजिंग पल्स एनिमेशन (Instant Feedback) */
+    /* रीसाइजिंग पल्स एनिमेशन */
     .resizing-pulse img {
       filter: blur(4px) brightness(1.2);
       transform: scale(0.98);
-    }
-    .resizing-badge-active {
-      animation: pulseGlow 0.4s infinite alternate;
-    }
-    @keyframes pulseGlow {
-      from { opacity: 0.5; }
-      to { opacity: 1; }
     }
 
     .dimension-badge {
@@ -816,7 +809,7 @@
         
         <div class="btn-browse" id="txtBtnBrowse">फ़ाइल सेलेक्ट करें</div>
         
-        <!-- सपोर्टेड फ़ॉर्मेट्स की लाइव लिस्ट -->
+        <!-- सपोर्टेड फॉर्मेट्स -->
         <div class="supported-formats-strip">
           <span class="format-tag highlight">SAMSUNG HEIC</span>
           <span class="format-tag highlight">HEIF</span>
@@ -833,7 +826,7 @@
       </div>
     </div>
 
-    <!-- हाई-टेक लेज़र HUD लोडिंग स्क्रीन -->
+    <!-- लेज़र HUD लोडिंग स्क्रीन -->
     <div class="card processing-overlay" id="processingBox">
       <div class="cyber-scanner-line"></div>
       <div class="hud-circle-wrap">
@@ -1045,7 +1038,7 @@
       document.getElementById('txtBtnJoinWa').innerText = d.btnJoinWa;
     }
 
-    // साइबर पार्टिकल एनिमेशन
+    // साइबर पार्टिकल बैकग्राउंड एनिमेशन
     const canvas = document.getElementById('bgCanvas');
     const ctx = canvas.getContext('2d');
     let particlesArray = [];
@@ -1158,7 +1151,7 @@
       }, 3000);
     }
 
-    // सुपर-फास्ट यूनिवर्सल इमेज लोडर (HEIC / Wide-Angle Safe)
+    // Samsung Motion Photo / Ultra HD Safe Decoder
     async function handleImage(e) {
       let file = e.target.files[0];
       if (!file) return;
@@ -1181,41 +1174,59 @@
       pBox.style.display = 'flex';
 
       const fileName = file.name.toLowerCase();
-      // HEIC / HEIF / Motion Photo सेफ हैंडलर
-      if (fileName.endsWith('.heic') || fileName.endsWith('.heif') || file.type.includes('heic') || file.type.includes('heif')) {
+      const isHeic = fileName.endsWith('.heic') || fileName.endsWith('.heif') || file.type.includes('heic') || file.type.includes('heif');
+
+      if (isHeic) {
         stepText.innerText = currentLang === 'hi' ? "Samsung HEIC फ़ाइल डिकोड हो रही है..." : "Decoding Samsung HEIC file...";
+        
         try {
-          // मेमोरी सुरक्षित रखने के लिए quality 0.85 और direct blob conversion
-          const convertedBlob = await heic2any({
+          // 3-सेकंड सेफ टाइमआउट (ताकि मोशन फोटो पर ब्राउज़र कभी न लटके)
+          const heicPromise = heic2any({
             blob: file,
             toType: "image/jpeg",
-            quality: 0.85
+            quality: 0.8
           });
+
+          const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error("HEIC Timeout")), 3000)
+          );
+
+          const convertedBlob = await Promise.race([heicPromise, timeoutPromise]);
           file = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
         } catch (err) {
-          console.warn("HEIC Decode fallback:", err);
-          showAlertModal("फ़ाइल लोड नहीं हो सकी, कृपया अन्य इमेज चुनें।", "Could not load file, choose standard image.");
-          resetTool();
-          return;
+          console.warn("HEIC डायरेक्ट कनवर्टर बाईपास:", err);
         }
       }
 
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function() {
-          sourceImage = img;
-          document.getElementById('origImg').src = img.src;
-          document.getElementById('origSizeLabel').innerText = (originalFileSize / (1024 * 1024)).toFixed(2) + ' MB';
-          document.getElementById('origDimBadge').innerText = `📐 ${img.width} × ${img.height} px`;
-          runAiScanAnimation();
+      try {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const img = new Image();
+          img.onload = function() {
+            sourceImage = img;
+            document.getElementById('origImg').src = img.src;
+            document.getElementById('origSizeLabel').innerText = (originalFileSize / (1024 * 1024)).toFixed(2) + ' MB';
+            document.getElementById('origDimBadge').innerText = `📐 ${img.width} × ${img.height} px`;
+            runAiScanAnimation();
+          };
+          img.onerror = function() {
+            showAlertModal(
+              "यह मोशन/HDR फ़ाइल ब्राउज़र मेमोरी में डिकोड नहीं हो सकी। कृपया इसे सामान्य फ़ोटो के रूप में चुनें।",
+              "Motion/HDR file could not be decoded. Please choose standard JPG.",
+              "warn"
+            );
+            resetTool();
+          };
+          img.src = event.target.result;
         };
-        img.src = event.target.result;
-      };
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      } catch (fatalErr) {
+        showAlertModal("फ़ाइल पढ़ने में त्रुटि हुई।", "Error reading file.", "warn");
+        resetTool();
+      }
     }
 
-    // साइबर लोडर एनिमेशन (Upload Progress)
+    // साइबर लोडर एनिमेशन
     function runAiScanAnimation() {
       const pBox = document.getElementById('processingBox');
       const bar = document.getElementById('progressBar');
@@ -1249,7 +1260,6 @@
       }, 25);
     }
 
-    // प्रीसेट बदलने पर स्मूथ रिसाइज़ पल्स
     function setPreset(kb, btn) {
       targetKB = kb;
       document.getElementById('targetKbInput').value = kb;
@@ -1341,7 +1351,6 @@
       let bestUnderTargetBlob = null;
       let fallbackBlob = null;
 
-      // 10-स्टेप बाइनरी सर्च: 0.1 KB की सटीकता
       for (let i = 0; i < 10; i++) {
         const mid = (low + high) / 2;
         const blob = await new Promise(resolve => offCanvas.toBlob(resolve, 'image/jpeg', mid));
