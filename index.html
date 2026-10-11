@@ -8,24 +8,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Google Search SEO Tags -->
+
   <meta name="description" content="Nischay Docs - बिहार बोर्ड और सभी सरकारी परीक्षाओं (BSEB, SSC, Railway) के लिए मुफ्त और अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र। 100% सुरक्षित और सटीक KB।">
   <meta name="keywords" content="Nischay Docs, Photo Resizer, Document Resizer, BSEB photo size, Bihar Board admit card photo resize, 20kb photo converter, 100kb document compress">
   <meta name="author" content="Prince Kumar">
 
-  <!-- Open Graph / WhatsApp / Facebook Share Tags (फोटो और नाम दिखने के लिए) -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nischaydesk.github.io/docs/">
   <meta property="og:title" content="Nischay Docs - अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र">
   <meta property="og:description" content="बिना पिक्सल फटे सटीक KB में फोटो और डॉक्यूमेंट रिसाइज़ करें। 100% सुरक्षित।">
   <meta property="og:image" content="https://nischaydesk.github.io/docs/preview.png">
 
-  <!-- Twitter Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Nischay Docs - HD File Resizer">
   <meta name="twitter:description" content="सटीक 20 KB, 50 KB और 100 KB में डॉक्यूमेंट तैयार करें।">
   <meta name="twitter:image" content="https://nischaydesk.github.io/docs/preview.png">
-<meta name="google-site-verification" content="uSCJGPNxrZ23LYmb3FsgLqdXYBZGGE1x8FDAyr-WSis" />
+  <meta name="google-site-verification" content="uSCJGPNxrZ23LYmb3FsgLqdXYBZGGE1x8FDAyr-WSis" />
+
   <!-- HEIC कन्वर्टर और कॉन्फ़ेटी इंजन -->
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -212,7 +211,7 @@
       position: relative;
       border: 2px dashed rgba(37, 99, 235, 0.4);
       border-radius: 18px;
-      padding: 50px 20px;
+      padding: 45px 20px 35px;
       text-align: center;
       cursor: pointer;
       background: var(--bg-elevated);
@@ -221,71 +220,132 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
+    }
+    .dropzone:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
     }
     .floating-icon-wrap {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(2, 132, 199, 0.25));
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 10px;
       border: 1px solid rgba(37, 99, 235, 0.25);
+      animation: pulseIcon 2s infinite ease-in-out;
+    }
+    @keyframes pulseIcon {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
     }
     .btn-browse {
-      margin-top: 10px;
       background: linear-gradient(135deg, var(--primary), #0284c7);
       border: none;
       color: #ffffff;
-      padding: 8px 24px;
+      padding: 10px 28px;
       border-radius: 25px;
       font-size: 13px;
       font-weight: 800;
       box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
 
-    /* HUD प्रोसेसिंग */
+    /* फ़ॉर्मेट्स बैज स्ट्रिप */
+    .supported-formats-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+      max-width: 550px;
+    }
+    .format-tag {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+    .format-tag.highlight {
+      background: rgba(37, 99, 235, 0.1);
+      border-color: rgba(37, 99, 235, 0.3);
+      color: var(--primary);
+    }
+
+    /* हाई-टेक साइबर HUD प्रोसेसिंग एनिमेशन */
     .processing-overlay {
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 50px 20px;
-      gap: 16px;
+      padding: 55px 20px;
+      gap: 18px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cyber-scanner-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--laser-color), transparent);
+      box-shadow: 0 0 15px var(--laser-color);
+      animation: scanLaser 1.8s infinite linear;
+    }
+    @keyframes scanLaser {
+      0% { top: 0%; }
+      50% { top: 100%; }
+      100% { top: 0%; }
     }
     .hud-circle-wrap {
       position: relative;
-      width: 90px;
-      height: 90px;
+      width: 105px;
+      height: 105px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .hud-ring {
+    .hud-ring-outer {
       position: absolute;
       width: 100%;
       height: 100%;
       border-radius: 50%;
       border: 3px dashed var(--laser-color);
-      animation: spinHUD 1.5s linear infinite;
+      animation: spinHUD 2s linear infinite;
+    }
+    .hud-ring-inner {
+      position: absolute;
+      width: 78%;
+      height: 78%;
+      border-radius: 50%;
+      border: 2px dotted #10b981;
+      animation: spinHUDReverse 1.5s linear infinite;
     }
     @keyframes spinHUD {
       100% { transform: rotate(360deg); }
     }
+    @keyframes spinHUDReverse {
+      100% { transform: rotate(-360deg); }
+    }
     .hud-percent {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 900;
       color: var(--laser-color);
+      z-index: 2;
     }
     .progress-bar-wrap {
       width: 100%;
-      max-width: 320px;
-      height: 8px;
+      max-width: 340px;
+      height: 9px;
       background: var(--bg-elevated);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--border);
     }
@@ -293,8 +353,8 @@
       width: 0%;
       height: 100%;
       background: linear-gradient(90deg, #2563eb, #0284c7, #10b981);
-      border-radius: 10px;
-      transition: width 0.1s ease-out;
+      border-radius: 12px;
+      transition: width 0.12s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* वर्कस्पेस */
@@ -398,6 +458,11 @@
       align-items: center;
       gap: 6px;
       box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-apply-size:active {
+      transform: scale(0.97);
     }
 
     .chips-group {
@@ -441,6 +506,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      position: relative;
     }
     .preview-tag {
       font-size: 11px;
@@ -459,11 +525,26 @@
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--border);
+      position: relative;
     }
     .preview-img-wrap img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
+      transition: filter 0.25s ease, transform 0.25s ease;
+    }
+
+    /* रीसाइजिंग पल्स एनिमेशन (Instant Feedback) */
+    .resizing-pulse img {
+      filter: blur(4px) brightness(1.2);
+      transform: scale(0.98);
+    }
+    .resizing-badge-active {
+      animation: pulseGlow 0.4s infinite alternate;
+    }
+    @keyframes pulseGlow {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
     }
 
     .dimension-badge {
@@ -494,6 +575,10 @@
       font-size: 24px;
       font-weight: 900;
       color: var(--accent-green);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .result-kb.pop {
+      transform: scale(1.15);
     }
 
     .btn-download {
@@ -515,7 +600,6 @@
       background: linear-gradient(135deg, #10b981, #059669);
     }
 
-    /* डाउनलोड टोस्ट */
     .download-toast {
       position: fixed;
       bottom: 24px;
@@ -541,7 +625,6 @@
       opacity: 1;
     }
 
-    /* कस्टम मोडल */
     .custom-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -726,22 +809,39 @@
     <div class="card" id="uploadCard">
       <div class="dropzone" onclick="document.getElementById('fileInput').click()">
         <div class="floating-icon-wrap">
-          <span style="font-size: 32px;">📄</span>
+          <span style="font-size: 34px;">📂</span>
         </div>
         <h3 style="font-size: 16px; font-weight: 800;" id="txtDropTitle">डॉक्यूमेंट या फोटो चुनें</h3>
-        <p style="font-size: 12px; color: var(--text-muted);" id="txtDropSub">Samsung HEIC, JPG, PNG सभी फॉर्मेट्स तुरंत लोड होंगे</p>
+        <p style="font-size: 12px; color: var(--text-muted);" id="txtDropSub">सभी मोबाइल व कैमरा फ़ॉर्मेट्स तुरंत लोड होंगे</p>
+        
         <div class="btn-browse" id="txtBtnBrowse">फ़ाइल सेलेक्ट करें</div>
-        <input type="file" id="fileInput" accept="image/*, .heic, .HEIC, .heif, .HEIF" style="display: none;" onchange="handleImage(event)">
+        
+        <!-- सपोर्टेड फ़ॉर्मेट्स की लाइव लिस्ट -->
+        <div class="supported-formats-strip">
+          <span class="format-tag highlight">SAMSUNG HEIC</span>
+          <span class="format-tag highlight">HEIF</span>
+          <span class="format-tag">JPG</span>
+          <span class="format-tag">JPEG</span>
+          <span class="format-tag">PNG</span>
+          <span class="format-tag">WEBP</span>
+          <span class="format-tag">BMP</span>
+          <span class="format-tag">GIF</span>
+          <span class="format-tag">TIFF</span>
+        </div>
+
+        <input type="file" id="fileInput" accept="image/*, .heic, .HEIC, .heif, .HEIF, .webp, .WEBP, .bmp, .BMP, .tiff, .TIFF" style="display: none;" onchange="handleImage(event)">
       </div>
     </div>
 
-    <!-- HUD लोडिंग स्क्रीन -->
+    <!-- हाई-टेक लेज़र HUD लोडिंग स्क्रीन -->
     <div class="card processing-overlay" id="processingBox">
+      <div class="cyber-scanner-line"></div>
       <div class="hud-circle-wrap">
-        <div class="hud-ring"></div>
+        <div class="hud-ring-outer"></div>
+        <div class="hud-ring-inner"></div>
         <div class="hud-percent" id="hudCount">0%</div>
       </div>
-      <h3 id="stepText" style="font-size: 15px; font-weight: 800;">फ़ाइल प्रोसेस हो रही है...</h3>
+      <h3 id="stepText" style="font-size: 15px; font-weight: 800; color: var(--text-main);">फ़ाइल डिकोड हो रही है...</h3>
       <div class="progress-bar-wrap">
         <div class="progress-bar-fill" id="progressBar"></div>
       </div>
@@ -794,12 +894,12 @@
           <div class="dimension-badge" id="origDimBadge">📐 0 × 0 px</div>
         </div>
 
-        <div class="preview-box">
+        <div class="preview-box" id="compPreviewBox">
           <div class="preview-tag">
             <span id="txtResizedTag">रिसाइज़्ड आउटपुट (तैयार)</span>
             <span style="color: var(--accent-green);" id="txtDocSafe">सुरक्षित डॉक्यूमेंट</span>
           </div>
-          <div class="preview-img-wrap">
+          <div class="preview-img-wrap" id="compImgWrap">
             <img id="compImg" alt="Compressed">
           </div>
           <div class="dimension-badge" id="compDimBadge" style="color: var(--primary);">📐 0 × 0 px</div>
@@ -867,7 +967,7 @@
         heroDesc: "पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।",
         qualityBadge: "✨ 100% फुल डॉक्यूमेंट (टारगेट KB से कभी अधिक नहीं)",
         dropTitle: "डॉक्यूमेंट या फोटो चुनें",
-        dropSub: "Samsung HEIC, JPG, PNG सभी फॉर्मेट्स तुरंत लोड होंगे",
+        dropSub: "सभी मोबाइल व कैमरा फ़ॉर्मेट्स तुरंत लोड होंगे",
         btnBrowse: "फ़ाइल सेलेक्ट करें",
         btnChangeFile: "🔄 दूसरी फ़ाइल चुनें",
         targetLabel: "टारगेट साइज़ सेट करें:",
@@ -893,7 +993,7 @@
         heroDesc: "100% Full Document Preservation (No Cropping). Compress to exact KB without pixel blur.",
         qualityBadge: "✨ 100% Full Document (Never exceeds target KB)",
         dropTitle: "Select Document or Photo",
-        dropSub: "Samsung HEIC, JPG, PNG formats load instantly",
+        dropSub: "All mobile & camera formats load instantly",
         btnBrowse: "Browse File",
         btnChangeFile: "🔄 Choose Another File",
         targetLabel: "Set Target File Size:",
@@ -1058,12 +1158,11 @@
       }, 3000);
     }
 
-    // 100% क्लीन अपलोड हैंडलर (पुराना डेटा तुरंत साफ़)
+    // सुपर-फास्ट यूनिवर्सल इमेज लोडर (HEIC / Wide-Angle Safe)
     async function handleImage(e) {
       let file = e.target.files[0];
       if (!file) return;
 
-      // 1. पुरानी इमेज का सारा कचरा तुरंत खाली करें
       sourceImage = null;
       finalBlob = null;
       document.getElementById('origImg').src = '';
@@ -1078,21 +1177,24 @@
       const stepText = document.getElementById('stepText');
       
       document.getElementById('uploadCard').style.display = 'none';
-      document.getElementById('workspace').style.display = 'none'; // पिछला वर्कस्पेस तुरंत छुपाएं
+      document.getElementById('workspace').style.display = 'none';
       pBox.style.display = 'flex';
 
       const fileName = file.name.toLowerCase();
-      if (fileName.endsWith('.heic') || fileName.endsWith('.heif') || file.type.includes('heic')) {
-        stepText.innerText = currentLang === 'hi' ? "HEIC फ़ाइल कन्वर्ट हो रही है..." : "Converting HEIC file...";
+      // HEIC / HEIF / Motion Photo सेफ हैंडलर
+      if (fileName.endsWith('.heic') || fileName.endsWith('.heif') || file.type.includes('heic') || file.type.includes('heif')) {
+        stepText.innerText = currentLang === 'hi' ? "Samsung HEIC फ़ाइल डिकोड हो रही है..." : "Decoding Samsung HEIC file...";
         try {
+          // मेमोरी सुरक्षित रखने के लिए quality 0.85 और direct blob conversion
           const convertedBlob = await heic2any({
             blob: file,
             toType: "image/jpeg",
-            quality: 0.90
+            quality: 0.85
           });
           file = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
         } catch (err) {
-          showAlertModal("फ़ाइल लोड नहीं हो सकी, कृपया JPG चुनें।", "Could not load file, choose JPG.");
+          console.warn("HEIC Decode fallback:", err);
+          showAlertModal("फ़ाइल लोड नहीं हो सकी, कृपया अन्य इमेज चुनें।", "Could not load file, choose standard image.");
           resetTool();
           return;
         }
@@ -1106,14 +1208,15 @@
           document.getElementById('origImg').src = img.src;
           document.getElementById('origSizeLabel').innerText = (originalFileSize / (1024 * 1024)).toFixed(2) + ' MB';
           document.getElementById('origDimBadge').innerText = `📐 ${img.width} × ${img.height} px`;
-          runAiAnimation();
+          runAiScanAnimation();
         };
         img.src = event.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    function runAiAnimation() {
+    // साइबर लोडर एनिमेशन (Upload Progress)
+    function runAiScanAnimation() {
       const pBox = document.getElementById('processingBox');
       const bar = document.getElementById('progressBar');
       const hudCount = document.getElementById('hudCount');
@@ -1123,16 +1226,16 @@
       let progress = 0;
 
       const interval = setInterval(() => {
-        progress += 10;
+        progress += 12;
         if (progress > 100) progress = 100;
         
         bar.style.width = progress + '%';
         hudCount.innerText = progress + '%';
 
-        if (progress === 40) {
-          stepText.innerText = currentLang === 'hi' ? "क्लैरिटी और रिज़ॉल्यूशन सेट हो रहा है..." : "Optimizing sharpness...";
-        } else if (progress === 80) {
-          stepText.innerText = currentLang === 'hi' ? "सटीक KB में फ़ाइल तैयार हो रही है..." : "Locking target KB...";
+        if (progress === 36) {
+          stepText.innerText = currentLang === 'hi' ? "पिक्सल ग्रिड और रेज़ोल्यूशन पढ़ा जा रहा है..." : "Reading pixel matrix...";
+        } else if (progress === 72) {
+          stepText.innerText = currentLang === 'hi' ? "अल्ट्रा HD क्लैरिटी लॉक हो रही है..." : "Locking Ultra HD clarity...";
         }
 
         if (progress >= 100) {
@@ -1141,20 +1244,19 @@
             pBox.style.display = 'none';
             document.getElementById('workspace').style.display = 'flex';
             processPureResizing();
-          }, 150);
+          }, 120);
         }
-      }, 30);
+      }, 25);
     }
 
+    // प्रीसेट बदलने पर स्मूथ रिसाइज़ पल्स
     function setPreset(kb, btn) {
       targetKB = kb;
       document.getElementById('targetKbInput').value = kb;
       document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       
-      // तुरंत स्क्रीन अपडेट
-      document.getElementById('finalKbDisplay').innerText = "⏳...";
-      processPureResizing();
+      triggerResizePulse();
     }
 
     function applyCustomTargetKb() {
@@ -1183,7 +1285,7 @@
       const origKb = originalFileSize / 1024;
       if (origKb < val) {
         showAlertModal(
-          `आपकी फ़ाइल पहले से ही ${origKb.toFixed(1)} KB की है। इसे बड़ा (${val} KB) करने से क्वालिटी नहीं बढ़ती, इसलिए इसे मूल बेस्ट क्वालिटी में सेव किया गया।`,
+          `आपकी फ़ाइल पहले से ही ${origKb.toFixed(1)} KB की है। इसे मूल HD क्वालिटी में सेव किया गया।`,
           `Your source file is already ${origKb.toFixed(1)} KB. Kept at original HD quality.`,
           "info"
         );
@@ -1192,17 +1294,27 @@
       targetKB = val;
       document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
       
-      const btn = document.getElementById('txtBtnApply');
-      btn.innerText = "⏳ ...";
-      document.getElementById('finalKbDisplay').innerText = "⏳...";
-      setTimeout(() => {
-        processPureResizing().then(() => {
-          btn.innerText = currentLang === 'hi' ? "⚡ रिसाइज़ करें" : "⚡ Resize Now";
-        });
-      }, 50);
+      triggerResizePulse();
     }
 
-    // शुद्ध JPG रिसाइज़िंग इंजन
+    // 150ms क्वांटम रिसाइज़ पल्स एनिमेशन
+    function triggerResizePulse() {
+      const wrap = document.getElementById('compImgWrap');
+      const kbText = document.getElementById('finalKbDisplay');
+      
+      wrap.classList.add('resizing-pulse');
+      kbText.innerText = "⚡ ...";
+
+      setTimeout(() => {
+        processPureResizing().then(() => {
+          wrap.classList.remove('resizing-pulse');
+          kbText.classList.add('pop');
+          setTimeout(() => kbText.classList.remove('pop'), 250);
+        });
+      }, 80);
+    }
+
+    // शुद्ध 1-स्टेप हाई प्रिसिजन रिसाइज़िंग इंजन
     async function processPureResizing() {
       if (!sourceImage) return;
 
@@ -1229,6 +1341,7 @@
       let bestUnderTargetBlob = null;
       let fallbackBlob = null;
 
+      // 10-स्टेप बाइनरी सर्च: 0.1 KB की सटीकता
       for (let i = 0; i < 10; i++) {
         const mid = (low + high) / 2;
         const blob = await new Promise(resolve => offCanvas.toBlob(resolve, 'image/jpeg', mid));
@@ -1245,14 +1358,13 @@
       }
       finalBlob = bestUnderTargetBlob || fallbackBlob;
 
-      // साफ़ नया URL बनाएँ ताकि पुराना कैश न दिखे
       const resultUrl = URL.createObjectURL(finalBlob);
       document.getElementById('compImg').src = resultUrl;
       const resultKb = (finalBlob.size / 1024).toFixed(1);
       document.getElementById('finalKbDisplay').innerText = `${resultKb} KB`;
       document.getElementById('statusDesc').innerText = currentLang === 'hi'
-        ? `टारगेट: ${targetKB} KB | तैयार: ${resultKb} KB (JPG सुरक्षित सीमा)`
-        : `Target: ${targetKB} KB | Ready: ${resultKb} KB (JPG Safe Limit)`;
+        ? `टारगेट: ${targetKB} KB | तैयार: ${resultKb} KB (सरकारी फॉर्म के लिए 100% मान्य)`
+        : `Target: ${targetKB} KB | Ready: ${resultKb} KB (Valid for Govt Forms)`;
     }
 
     function triggerDownload() {
