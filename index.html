@@ -10,21 +10,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Google Search SEO Tags -->
-  <meta name="description" content="Nischay Docs - बिहार बोर्ड और सभी सरकारी परीक्षाओं (BSEB, SSC, Railway) के लिए मुफ्त और अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र। 100% सुरक्षित और सटीक KB।">
-  <meta name="keywords" content="Nischay Docs, Photo Resizer, Document Resizer, BSEB photo size, Bihar Board admit card photo resize, 20kb photo converter, 100kb document compress">
+  <meta name="description" content="Nischay Docs - बिहार बोर्ड और सभी सरकारी परीक्षाओं (BSEB, SSC, Railway) के लिए मुफ्त और अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र। 100% सुरक्षित और सटीक KB/MB।">
+  <meta name="keywords" content="Nischay Docs, Photo Resizer, Document Resizer, BSEB photo size, Bihar Board admit card photo resize, 20kb photo converter, 100kb document compress, MB to KB converter">
   <meta name="author" content="Prince Kumar">
 
   <!-- Open Graph / WhatsApp / Facebook Share Tags -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nischaydesk.github.io/docs/">
   <meta property="og:title" content="Nischay Docs - अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र">
-  <meta property="og:description" content="बिना पिक्सल फटे सटीक KB में फोटो और डॉक्यूमेंट रिसाइज़ करें। 100% सुरक्षित।">
+  <meta property="og:description" content="बिना पिक्सल फटे सटीक KB और MB में फोटो और डॉक्यूमेंट रिसाइज़ करें। 100% सुरक्षित।">
   <meta property="og:image" content="https://nischaydesk.github.io/docs/preview.png">
 
   <!-- Twitter Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Nischay Docs - HD File Resizer">
-  <meta name="twitter:description" content="सटीक 20 KB, 50 KB और 100 KB में डॉक्यूमेंट तैयार करें।">
+  <meta name="twitter:description" content="सटीक KB और MB में डॉक्यूमेंट तैयार करें।">
   <meta name="twitter:image" content="https://nischaydesk.github.io/docs/preview.png">
   <meta name="google-site-verification" content="uSCJGPNxrZ23LYmb3FsgLqdXYBZGGE1x8FDAyr-WSis" />
 
@@ -428,10 +428,10 @@
     .target-input-wrap {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       background: var(--bg-surface);
       border: 2px solid var(--border);
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 12px;
     }
     .target-input-wrap:focus-within {
@@ -446,6 +446,19 @@
       width: 75px;
       outline: none;
       text-align: right;
+    }
+
+    /* यूनिट टॉगल ड्रॉपडाउन/सिलेक्ट */
+    .unit-selector {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 900;
+      padding: 4px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
     }
     
     .btn-apply-size {
@@ -794,9 +807,9 @@
   <main class="container">
     <div class="hero-title">
       <h1 id="txtHeroTitle">अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र</h1>
-      <p id="txtHeroDesc">पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।</p>
+      <p id="txtHeroDesc">पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB और MB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।</p>
       <div class="quality-badge" id="txtQualityBadge">
-        ✨ 100% फुल डॉक्यूमेंट (टारगेट KB से कभी अधिक नहीं)
+        ✨ 100% फुल डॉक्यूमेंट (टारगेट साइज़ से कभी अधिक नहीं)
       </div>
     </div>
 
@@ -859,21 +872,26 @@
           <div style="font-size: 13px; font-weight: 800;" id="txtTargetLabel">टारगेट साइज़ सेट करें:</div>
           <div class="target-box-group">
             <div class="target-input-wrap">
-              <input type="number" id="targetKbInput" class="target-input" value="100" min="10" max="500">
-              <span style="font-size: 13px; font-weight: 900; color: #0284c7;">KB</span>
+              <input type="number" id="targetSizeInput" class="target-input" value="100" min="10" step="any">
+              <select id="sizeUnitSelector" class="unit-selector" onchange="handleUnitChange()">
+                <option value="KB" selected>KB</option>
+                <option value="MB">MB</option>
+              </select>
             </div>
-            <button class="btn-apply-size" onclick="applyCustomTargetKb()" id="txtBtnApply">
+            <button class="btn-apply-size" onclick="applyCustomTargetSize()" id="txtBtnApply">
               ⚡ रिसाइज़ करें
             </button>
           </div>
         </div>
 
+        <!-- प्रीसेट चिप्स (KB और MB दोनों) -->
         <div class="chips-group">
-          <button class="chip-btn" onclick="setPreset(15, this)" id="chip1">15 KB (साइन)</button>
-          <button class="chip-btn" onclick="setPreset(35, this)" id="chip2">35 KB (फोटो)</button>
-          <button class="chip-btn active" onclick="setPreset(100, this)" id="chip3">100 KB (मार्कशीट)</button>
-          <button class="chip-btn" onclick="setPreset(200, this)" id="chip4">200 KB (सरकारी फॉर्म)</button>
-          <button class="chip-btn" onclick="setPreset(300, this)" id="chip5">300 KB (हाई क्वालिटी)</button>
+          <button class="chip-btn" onclick="setPreset(15, 'KB', this)" id="chip1">15 KB (साइन)</button>
+          <button class="chip-btn" onclick="setPreset(35, 'KB', this)" id="chip2">35 KB (फोटो)</button>
+          <button class="chip-btn active" onclick="setPreset(100, 'KB', this)" id="chip3">100 KB (मार्कशीट)</button>
+          <button class="chip-btn" onclick="setPreset(200, 'KB', this)" id="chip4">200 KB (सरकारी फॉर्म)</button>
+          <button class="chip-btn" onclick="setPreset(1, 'MB', this)" id="chip5">1 MB (HD डॉक्यूमेंट)</button>
+          <button class="chip-btn" onclick="setPreset(2, 'MB', this)" id="chip6">2 MB (अल्ट्रा HD)</button>
         </div>
       </div>
 
@@ -906,7 +924,7 @@
           <h4 id="statusTitle" style="font-size: 14px; font-weight: 800;">✅ फ़ाइल सफलतापूर्वक रिसाइज़ हो गई!</h4>
           <p id="statusDesc" style="font-size: 11px; color: var(--text-muted);">सभी अक्षर और नंबर बिल्कुल साफ़ रहेंगे</p>
         </div>
-        <div class="result-kb" id="finalKbDisplay">-- KB</div>
+        <div class="result-kb" id="finalSizeDisplay">-- KB</div>
       </div>
 
       <button class="btn-download" id="downloadBtn" onclick="triggerDownload()">
@@ -959,8 +977,8 @@
       hi: {
         langBtnLabel: "English",
         heroTitle: "अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र",
-        heroDesc: "पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।",
-        qualityBadge: "✨ 100% फुल डॉक्यूमेंट (टारगेट KB से कभी अधिक नहीं)",
+        heroDesc: "पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB और MB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।",
+        qualityBadge: "✨ 100% फुल डॉक्यूमेंट (टारगेट साइज़ से कभी अधिक नहीं)",
         dropTitle: "डॉक्यूमेंट या फोटो चुनें",
         dropSub: "सभी मोबाइल व कैमरा फ़ॉर्मेट्स तुरंत लोड होंगे",
         btnBrowse: "फ़ाइल सेलेक्ट करें",
@@ -971,7 +989,8 @@
         chip2: "35 KB (फोटो)",
         chip3: "100 KB (मार्कशीट)",
         chip4: "200 KB (सरकारी फॉर्म)",
-        chip5: "300 KB (हाई क्वालिटी)",
+        chip5: "1 MB (HD डॉक्यूमेंट)",
+        chip6: "2 MB (अल्ट्रा HD)",
         origTag: "ओरिजिनल फ़ाइल",
         resizedTag: "रिसाइज़्ड आउटपुट (तैयार)",
         docSafe: "सुरक्षित डॉक्यूमेंट",
@@ -985,8 +1004,8 @@
       en: {
         langBtnLabel: "हिंदी",
         heroTitle: "Ultra HD Photo & Document Resizer",
-        heroDesc: "100% Full Document Preservation (No Cropping). Compress to exact KB without pixel blur.",
-        qualityBadge: "✨ 100% Full Document (Never exceeds target KB)",
+        heroDesc: "100% Full Document Preservation (No Cropping). Compress to exact KB & MB without pixel blur.",
+        qualityBadge: "✨ 100% Full Document (Never exceeds target size)",
         dropTitle: "Select Document or Photo",
         dropSub: "All mobile & camera formats load instantly",
         btnBrowse: "Browse File",
@@ -997,7 +1016,8 @@
         chip2: "35 KB (Photo)",
         chip3: "100 KB (Marksheet)",
         chip4: "200 KB (Govt Forms)",
-        chip5: "300 KB (High Quality)",
+        chip5: "1 MB (HD Document)",
+        chip6: "2 MB (Ultra HD)",
         origTag: "Original File",
         resizedTag: "Resized Output (Ready)",
         docSafe: "Preserved Document",
@@ -1029,6 +1049,7 @@
       document.getElementById('chip3').innerText = d.chip3;
       document.getElementById('chip4').innerText = d.chip4;
       document.getElementById('chip5').innerText = d.chip5;
+      document.getElementById('chip6').innerText = d.chip6;
       document.getElementById('txtOrigTag').innerText = d.origTag;
       document.getElementById('txtResizedTag').innerText = d.resizedTag;
       document.getElementById('txtDocSafe').innerText = d.docSafe;
@@ -1121,6 +1142,7 @@
     let originalFileSize = 0;
     let finalBlob = null;
     let targetKB = 100;
+    let currentUnit = 'KB';
 
     function toggleTheme() {
       const root = document.documentElement;
@@ -1153,6 +1175,21 @@
       }, 3000);
     }
 
+    // यूनिट बदलने का हैंडलर (KB <-> MB)
+    function handleUnitChange() {
+      const selector = document.getElementById('sizeUnitSelector');
+      const input = document.getElementById('targetSizeInput');
+      const newUnit = selector.value;
+      const currentVal = parseFloat(input.value);
+
+      if (newUnit === 'MB' && currentUnit === 'KB') {
+        input.value = (currentVal / 1024).toFixed(2);
+      } else if (newUnit === 'KB' && currentUnit === 'MB') {
+        input.value = Math.round(currentVal * 1024);
+      }
+      currentUnit = newUnit;
+    }
+
     // सुपर-रॉबस्ट इमेज लोडर
     async function handleImage(e) {
       let file = e.target.files[0];
@@ -1162,7 +1199,7 @@
       finalBlob = null;
       document.getElementById('origImg').src = '';
       document.getElementById('compImg').src = '';
-      document.getElementById('finalKbDisplay').innerText = '-- KB';
+      document.getElementById('finalSizeDisplay').innerText = '-- KB';
       document.getElementById('origDimBadge').innerText = '📐 0 × 0 px';
       document.getElementById('compDimBadge').innerText = '📐 0 × 0 px';
 
@@ -1279,48 +1316,60 @@
       }, 25);
     }
 
-    function setPreset(kb, btn) {
-      targetKB = kb;
-      document.getElementById('targetKbInput').value = kb;
+    function setPreset(val, unit, btn) {
+      currentUnit = unit;
+      document.getElementById('sizeUnitSelector').value = unit;
+      document.getElementById('targetSizeInput').value = val;
+      
+      targetKB = unit === 'MB' ? Math.round(val * 1024) : val;
+
       document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       
       triggerResizePulse();
     }
 
-    function applyCustomTargetKb() {
-      const val = parseInt(document.getElementById('targetKbInput').value);
+    function applyCustomTargetSize() {
+      const inputVal = parseFloat(document.getElementById('targetSizeInput').value);
+      const unit = document.getElementById('sizeUnitSelector').value;
+      currentUnit = unit;
 
-      if (val > 500) {
-        showAlertModal(
-          "कृपया 10 KB से 500 KB के बीच का साइज़ दर्ज करें। सरकारी फॉर्म्स में 500 KB से अधिक मान्य नहीं होता।",
-          "Please enter between 10 KB and 500 KB. Portals do not accept files above 500 KB."
-        );
-        document.getElementById('targetKbInput').value = 500;
-        targetKB = 500;
+      if (isNaN(inputVal) || inputVal <= 0) {
+        showAlertModal("कृपया सही साइज़ दर्ज करें।", "Please enter a valid file size.");
         return;
       }
 
-      if (val < 10 || isNaN(val)) {
+      let calculatedKB = unit === 'MB' ? Math.round(inputVal * 1024) : Math.round(inputVal);
+
+      // अधिकतम 10 MB (10240 KB) तक की सुरक्षा
+      if (calculatedKB > 10240) {
+        showAlertModal(
+          "अधिकतम साइज़ सीमा 10 MB (10240 KB) है।",
+          "Maximum allowed file size limit is 10 MB."
+        );
+        calculatedKB = 10240;
+        document.getElementById('targetSizeInput').value = unit === 'MB' ? 10 : 10240;
+      }
+
+      if (calculatedKB < 10) {
         showAlertModal(
           "न्यूनतम साइज़ 10 KB होना चाहिए ताकि लिखावट साफ़ रहे।",
           "Minimum allowed size is 10 KB to preserve legibility."
         );
-        document.getElementById('targetKbInput').value = 10;
-        targetKB = 10;
-        return;
+        calculatedKB = 10;
+        document.getElementById('targetSizeInput').value = unit === 'MB' ? 0.01 : 10;
       }
 
       const origKb = originalFileSize / 1024;
-      if (origKb < val) {
+      if (origKb < calculatedKB) {
         showAlertModal(
-          `आपकी फ़ाइल पहले से ही ${origKb.toFixed(1)} KB की है। इसे मूल HD क्वालिटी में सेव किया गया।`,
-          `Your source file is already ${origKb.toFixed(1)} KB. Kept at original HD quality.`,
+          `आपकी फ़ाइल पहले से ही ${(origKb >= 1024 ? (origKb/1024).toFixed(2) + ' MB' : origKb.toFixed(1) + ' KB')} की है। इसे मूल HD क्वालिटी में सेव किया गया।`,
+          `Your source file is already smaller than target. Kept at original HD quality.`,
           "info"
         );
       }
 
-      targetKB = val;
+      targetKB = calculatedKB;
       document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
       
       triggerResizePulse();
@@ -1329,25 +1378,31 @@
     // 150ms क्वांटम रिसाइज़ पल्स एनिमेशन
     function triggerResizePulse() {
       const wrap = document.getElementById('compImgWrap');
-      const kbText = document.getElementById('finalKbDisplay');
+      const display = document.getElementById('finalSizeDisplay');
       
       wrap.classList.add('resizing-pulse');
-      kbText.innerText = "⚡ ...";
+      display.innerText = "⚡ ...";
 
       setTimeout(() => {
         processPureResizing().then(() => {
           wrap.classList.remove('resizing-pulse');
-          kbText.classList.add('pop');
-          setTimeout(() => kbText.classList.remove('pop'), 250);
+          display.classList.add('pop');
+          setTimeout(() => display.classList.remove('pop'), 250);
         });
       }, 80);
     }
 
-    // शुद्ध 1-स्टेप हाई प्रिसिजन रिसाइज़िंग इंजन
+    // शुद्ध 1-स्टेप हाई प्रिसिजन रिसाइज़िंग इंजन (KB व MB दोनों के लिए)
     async function processPureResizing() {
       if (!sourceImage) return;
 
-      let targetWidth = targetKB >= 80 ? 1200 : 700;
+      let targetWidth = 1200;
+      if (targetKB >= 1024) {
+        targetWidth = 2400; // 1MB+ के लिए अल्ट्रा हाई रेज़ोल्यूशन
+      } else if (targetKB < 80) {
+        targetWidth = 700;
+      }
+
       let targetHeight = Math.round((sourceImage.height / sourceImage.width) * targetWidth);
 
       if (sourceImage.width < targetWidth) {
@@ -1388,11 +1443,20 @@
 
       const resultUrl = URL.createObjectURL(finalBlob);
       document.getElementById('compImg').src = resultUrl;
-      const resultKb = (finalBlob.size / 1024).toFixed(1);
-      document.getElementById('finalKbDisplay').innerText = `${resultKb} KB`;
+      
+      const resultKb = finalBlob.size / 1024;
+      const formattedOutput = resultKb >= 1024 
+        ? (resultKb / 1024).toFixed(2) + ' MB' 
+        : resultKb.toFixed(1) + ' KB';
+
+      const targetFormatted = targetKB >= 1024 
+        ? (targetKB / 1024).toFixed(1) + ' MB' 
+        : targetKB + ' KB';
+
+      document.getElementById('finalSizeDisplay').innerText = formattedOutput;
       document.getElementById('statusDesc').innerText = currentLang === 'hi'
-        ? `टारगेट: ${targetKB} KB | तैयार: ${resultKb} KB (सरकारी फॉर्म के लिए 100% मान्य)`
-        : `Target: ${targetKB} KB | Ready: ${resultKb} KB (Valid for Govt Forms)`;
+        ? `टारगेट: ${targetFormatted} | तैयार: ${formattedOutput} (100% सटीक रिसाइज़)`
+        : `Target: ${targetFormatted} | Ready: ${formattedOutput} (100% Accurate)`;
     }
 
     function triggerDownload() {
@@ -1419,7 +1483,9 @@
       const link = document.createElement('a');
       link.style.display = 'none';
       link.href = fileUrl;
-      link.download = `NischayDocs_${targetKB}KB_${Date.now()}.jpg`;
+      
+      const fileLabel = targetKB >= 1024 ? `${(targetKB/1024).toFixed(1)}MB` : `${targetKB}KB`;
+      link.download = `NischayDocs_${fileLabel}_${Date.now()}.jpg`;
       
       document.body.appendChild(link);
       link.click();
