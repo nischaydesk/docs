@@ -9,60 +9,44 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Google Search SEO Tags -->
-  <meta name="description" content="Nischay Docs - बिहार बोर्ड और सभी सरकारी परीक्षाओं (BSEB, SSC, Railway) के लिए मुफ्त और अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र। 100% सुरक्षित और सटीक KB/MB।">
-  <meta name="keywords" content="Nischay Docs, Photo Resizer, Document Resizer, BSEB photo size, Bihar Board admit card photo resize, 20kb photo converter, 100kb document compress, MB to KB converter">
+  <meta name="description" content="Nischay Docs - सटीक KB और MB में फोटो व डॉक्यूमेंट रिसाइज़र। 100% सुरक्षित और अल्ट्रा HD क्लैरिटी।">
   <meta name="author" content="Prince Kumar">
 
-  <!-- Open Graph / WhatsApp / Facebook Share Tags -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nischaydesk.github.io/docs/">
-  <meta property="og:title" content="Nischay Docs - अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र">
-  <meta property="og:description" content="बिना पिक्सल फटे सटीक KB और MB में फोटो और डॉक्यूमेंट रिसाइज़ करें। 100% सुरक्षित।">
-  <meta property="og:image" content="https://nischaydesk.github.io/docs/preview.png">
-
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Nischay Docs - HD File Resizer">
-  <meta name="twitter:description" content="सटीक KB और MB में डॉक्यूमेंट तैयार करें।">
-  <meta name="twitter:image" content="https://nischaydesk.github.io/docs/preview.png">
-  <meta name="google-site-verification" content="uSCJGPNxrZ23LYmb3FsgLqdXYBZGGE1x8FDAyr-WSis" />
-
-  <!-- HEIC कन्वर्टर और कॉन्फ़ेटी इंजन -->
+  <!-- HEIC कन्वर्टर और कॉन्फ़ेटी -->
   <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     :root[data-theme="light"] {
-      --bg-base: #f0f4f9;
-      --bg-surface: rgba(255, 255, 255, 0.9);
-      --bg-elevated: #ffffff;
-      --border: #e2e8f0;
+      --bg-base: #f1f5f9;
+      --bg-surface: #ffffff;
+      --bg-elevated: #f8fafc;
+      --border: #cbd5e1;
       --text-main: #0f172a;
       --text-muted: #64748b;
-      --header-bg: rgba(255, 255, 255, 0.85);
-      --card-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.92);
+      --card-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
       --laser-color: #0284c7;
       --preview-wrap: #e2e8f0;
     }
 
     :root[data-theme="dark"] {
-      --bg-base: #060913;
-      --bg-surface: rgba(15, 23, 42, 0.9);
+      --bg-base: #090d16;
+      --bg-surface: #131c2e;
       --bg-elevated: #1e293b;
       --border: #334155;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --header-bg: rgba(15, 23, 42, 0.85);
-      --card-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+      --header-bg: rgba(19, 28, 46, 0.92);
+      --card-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
       --laser-color: #38bdf8;
       --preview-wrap: #030712;
     }
 
     :root {
       --primary: #2563eb;
+      --primary-hover: #1d4ed8;
       --accent-green: #10b981;
-      --whatsapp-green: #25d366;
     }
 
     * {
@@ -81,18 +65,6 @@
       display: flex;
       flex-direction: column;
       line-height: 1.6;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    #bgCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
     }
 
     header {
@@ -105,7 +77,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
     }
     .brand {
       display: flex;
@@ -114,9 +86,8 @@
       text-decoration: none;
     }
     .brand-logo-svg {
-      width: 42px;
-      height: 42px;
-      filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.25));
+      width: 40px;
+      height: 40px;
     }
     .brand-title {
       font-size: 19px;
@@ -142,7 +113,6 @@
       align-items: center;
       gap: 10px;
     }
-
     .btn-lang-toggle {
       background: var(--bg-surface);
       border: 1.5px solid var(--primary);
@@ -165,14 +135,13 @@
     }
 
     .container {
-      max-width: 960px;
+      max-width: 920px;
       width: 92%;
-      margin: 25px auto 45px;
+      margin: 24px auto 40px;
       display: flex;
       flex-direction: column;
-      gap: 22px;
-      position: relative;
-      z-index: 1;
+      gap: 20px;
+      flex: 1;
     }
 
     .hero-title {
@@ -196,9 +165,9 @@
       color: var(--accent-green);
       font-size: 12px;
       font-weight: 800;
-      padding: 6px 18px;
+      padding: 6px 16px;
       border-radius: 30px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .card {
@@ -210,11 +179,12 @@
       position: relative;
     }
 
+    /* ड्रॉपज़ोन */
     .dropzone {
       position: relative;
-      border: 2px dashed rgba(37, 99, 235, 0.4);
+      border: 2px dashed rgba(37, 99, 235, 0.45);
       border-radius: 18px;
-      padding: 45px 20px 30px;
+      padding: 40px 20px 26px;
       text-align: center;
       cursor: pointer;
       background: var(--bg-elevated);
@@ -227,22 +197,16 @@
     }
     .dropzone:hover {
       border-color: var(--primary);
-      transform: translateY(-2px);
     }
     .floating-icon-wrap {
-      width: 76px;
-      height: 76px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(2, 132, 199, 0.25));
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(37, 99, 235, 0.25);
-      animation: pulseIcon 2s infinite ease-in-out;
-    }
-    @keyframes pulseIcon {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
+      font-size: 32px;
     }
     .btn-browse {
       background: linear-gradient(135deg, var(--primary), #0284c7);
@@ -254,25 +218,31 @@
       font-weight: 800;
       box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
-
-    /* सपोर्टेड फ़ॉर्मेट्स बैज स्ट्रिप */
+    .max-upload-info {
+      font-size: 12px;
+      font-weight: 800;
+      color: #e11d48;
+      background: rgba(225, 29, 72, 0.08);
+      border: 1px solid rgba(225, 29, 72, 0.25);
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
     .supported-formats-strip {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 6px;
-      margin-top: 10px;
+      margin-top: 6px;
       max-width: 580px;
     }
     .format-tag {
       font-size: 10px;
       font-weight: 800;
-      padding: 4px 9px;
+      padding: 4px 8px;
       border-radius: 6px;
       background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      letter-spacing: 0.5px;
     }
     .format-tag.highlight {
       background: rgba(37, 99, 235, 0.1);
@@ -280,84 +250,77 @@
       color: var(--primary);
     }
 
-    /* हाई-टेक साइबर लेज़र HUD प्रोसेसिंग */
-    .processing-overlay {
+    /* अपलोड टाइम शांत लेज़र HUD */
+    .calming-laser-hud {
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 55px 20px;
-      gap: 18px;
-      text-align: center;
+      padding: 45px 20px;
+      background: var(--bg-elevated);
+      border-radius: 18px;
+      border: 1px solid var(--border);
       position: relative;
       overflow: hidden;
+      text-align: center;
+      gap: 16px;
     }
-    .cyber-scanner-line {
+    .laser-beam-header {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 3px;
-      background: linear-gradient(90deg, transparent, var(--laser-color), transparent);
-      box-shadow: 0 0 15px var(--laser-color);
-      animation: scanLaser 1.8s infinite linear;
+      background: linear-gradient(90deg, transparent, #38bdf8, #10b981, transparent);
+      box-shadow: 0 0 18px #38bdf8;
+      animation: laserTravel 1.6s ease-in-out infinite alternate;
     }
-    @keyframes scanLaser {
+    @keyframes laserTravel {
       0% { top: 0%; }
-      50% { top: 100%; }
-      100% { top: 0%; }
+      100% { top: 98%; }
     }
-    .hud-circle-wrap {
-      position: relative;
-      width: 105px;
-      height: 105px;
+    .hud-orb {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      border: 2px dashed #0284c7;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .hud-ring-outer {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3px dashed var(--laser-color);
-      animation: spinHUD 2s linear infinite;
-    }
-    .hud-ring-inner {
-      position: absolute;
-      width: 78%;
-      height: 78%;
-      border-radius: 50%;
-      border: 2px dotted #10b981;
-      animation: spinHUDReverse 1.5s linear infinite;
+      animation: spinHUD 3s linear infinite;
     }
     @keyframes spinHUD {
       100% { transform: rotate(360deg); }
     }
-    @keyframes spinHUDReverse {
-      100% { transform: rotate(-360deg); }
-    }
-    .hud-percent {
-      font-size: 20px;
+    .hud-orb-percent {
+      font-size: 18px;
       font-weight: 900;
       color: var(--laser-color);
-      z-index: 2;
     }
-    .progress-bar-wrap {
+    .hud-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .hud-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .hud-bar-wrap {
       width: 100%;
-      max-width: 340px;
-      height: 9px;
-      background: var(--bg-elevated);
+      max-width: 300px;
+      height: 8px;
+      background: var(--bg-surface);
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--border);
     }
-    .progress-bar-fill {
+    .hud-bar-fill {
       width: 0%;
       height: 100%;
       background: linear-gradient(90deg, #2563eb, #0284c7, #10b981);
       border-radius: 12px;
-      transition: width 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: width 0.2s ease-out;
     }
 
     /* वर्कस्पेस */
@@ -366,7 +329,6 @@
       flex-direction: column;
       gap: 20px;
     }
-
     .workspace-top-bar {
       display: flex;
       justify-content: space-between;
@@ -380,7 +342,6 @@
     .file-name-indicator {
       font-size: 13px;
       font-weight: 700;
-      color: var(--text-main);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -401,7 +362,7 @@
     }
     .btn-change-file:hover {
       background: var(--primary);
-      color: #ffffff;
+      color: #fff;
     }
 
     .control-panel {
@@ -434,9 +395,6 @@
       padding: 6px 12px;
       border-radius: 12px;
     }
-    .target-input-wrap:focus-within {
-      border-color: var(--primary);
-    }
     .target-input {
       background: transparent;
       border: none;
@@ -447,8 +405,6 @@
       outline: none;
       text-align: right;
     }
-
-    /* यूनिट टॉगल ड्रॉपडाउन/सिलेक्ट */
     .unit-selector {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
@@ -460,7 +416,6 @@
       cursor: pointer;
       outline: none;
     }
-    
     .btn-apply-size {
       background: var(--primary);
       color: white;
@@ -470,15 +425,10 @@
       font-size: 13px;
       font-weight: 800;
       cursor: pointer;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
       display: flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-apply-size:active {
-      transform: scale(0.97);
     }
 
     .chips-group {
@@ -500,7 +450,6 @@
       background: var(--primary);
       border-color: var(--primary);
       color: white;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
 
     .preview-grid {
@@ -509,9 +458,7 @@
       gap: 16px;
     }
     @media (max-width: 620px) {
-      .preview-grid {
-        grid-template-columns: 1fr;
-      }
+      .preview-grid { grid-template-columns: 1fr; }
     }
     .preview-box {
       background: var(--bg-elevated);
@@ -547,12 +494,43 @@
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      transition: filter 0.25s ease, transform 0.25s ease;
     }
 
-    .resizing-pulse img {
-      filter: blur(4px) brightness(1.2);
-      transform: scale(0.98);
+    /* रिसाइज़ होते समय चलने वाला रियल लेज़र स्कैनर */
+    .card-laser-scanner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #00f0ff;
+      box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+      display: none;
+      z-index: 10;
+    }
+    .scanning-active .card-laser-scanner {
+      display: block;
+      animation: laserSweep 1s ease-in-out infinite alternate;
+    }
+    @keyframes laserSweep {
+      0% { top: 0%; }
+      100% { top: 98%; }
+    }
+    .scan-glass-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .scanning-active .scan-glass-overlay {
+      display: flex;
     }
 
     .dimension-badge {
@@ -563,10 +541,6 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
       align-self: center;
     }
 
@@ -583,18 +557,23 @@
       font-size: 24px;
       font-weight: 900;
       color: var(--accent-green);
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .result-kb.pop {
-      transform: scale(1.15);
     }
 
+    /* डाउनलोड बटन - रिसाइज़ पूरा होने तक 100% HIDE */
+    .download-zone-wrap {
+      display: none;
+      animation: popInBtn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popInBtn {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
     .btn-download {
       background: linear-gradient(135deg, #2563eb, #0284c7);
       color: white;
       border: none;
       padding: 16px;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 15px;
       font-weight: 800;
       cursor: pointer;
@@ -602,92 +581,39 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
+      width: 100%;
       box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
-    }
-    .btn-download.success {
-      background: linear-gradient(135deg, #10b981, #059669);
-    }
-
-    .download-toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: rgba(16, 185, 129, 0.95);
-      color: #ffffff;
-      padding: 12px 26px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
-      z-index: 300;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .download-toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
     }
 
     .custom-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 250;
+      z-index: 200;
       padding: 20px;
     }
     .custom-modal-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      max-width: 460px;
+      border-radius: 18px;
+      max-width: 420px;
       width: 100%;
       padding: 24px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 12px;
     }
-    .modal-icon-badge {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-    }
-    .badge-warn {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      color: #f59e0b;
-    }
-    .badge-info {
-      background: rgba(37, 99, 235, 0.15);
-      border: 1px solid rgba(37, 99, 235, 0.35);
-      color: #38bdf8;
-    }
-    .modal-msg {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.5;
-    }
     .btn-modal-ok {
       background: var(--primary);
       color: white;
       border: none;
-      padding: 9px 24px;
+      padding: 8px 24px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 800;
@@ -701,79 +627,45 @@
       text-align: center;
       margin-top: auto;
       color: #94a3b8;
-      position: relative;
-      z-index: 1;
     }
     .footer-content {
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       gap: 16px;
       align-items: center;
     }
-    .footer-wa-card {
-      background: linear-gradient(135deg, rgba(37, 211, 102, 0.12), rgba(16, 185, 129, 0.16));
-      border: 1px solid rgba(37, 211, 102, 0.35);
-      border-radius: 18px;
-      padding: 20px 24px;
-      width: 100%;
-      max-width: 650px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      text-align: left;
-    }
-    .footer-wa-text h4 {
-      color: #ffffff;
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 2px;
-    }
-    .footer-wa-text p {
-      color: #94a3b8;
-      font-size: 12px;
-    }
     .btn-footer-wa {
       background: #25d366;
-      color: #ffffff;
+      color: #fff;
       text-decoration: none;
-      padding: 9px 20px;
+      padding: 10px 24px;
       border-radius: 30px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-    .footer-brand {
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 800;
-    }
-    .footer-brand span {
-      color: #38bdf8;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
     }
     .footer-links {
       display: flex;
-      justify-content: center;
       gap: 20px;
-      flex-wrap: wrap;
+      justify-content: center;
     }
     .footer-links a {
-      color: #cbd5e1;
+      color: #93c5fd;
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
     }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-
-  <canvas id="bgCanvas"></canvas>
 
   <header>
     <a href="index.html" class="brand">
@@ -797,7 +689,6 @@
       <button class="btn-lang-toggle" onclick="toggleLanguage()" id="langBtn">
         🌐 <span id="langLabel">English</span>
       </button>
-
       <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
         🌙 <span>Dark Mode</span>
       </button>
@@ -807,7 +698,7 @@
   <main class="container">
     <div class="hero-title">
       <h1 id="txtHeroTitle">अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र</h1>
-      <p id="txtHeroDesc">पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB और MB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।</p>
+      <p id="txtHeroDesc">पूरी फाइल सुरक्षित रहेगी—सटीक KB और MB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।</p>
       <div class="quality-badge" id="txtQualityBadge">
         ✨ 100% फुल डॉक्यूमेंट (टारगेट साइज़ से कभी अधिक नहीं)
       </div>
@@ -816,15 +707,16 @@
     <!-- अपलोड कार्ड -->
     <div class="card" id="uploadCard">
       <div class="dropzone" onclick="document.getElementById('fileInput').click()">
-        <div class="floating-icon-wrap">
-          <span style="font-size: 34px;">📂</span>
-        </div>
+        <div class="floating-icon-wrap">📂</div>
         <h3 style="font-size: 16px; font-weight: 800;" id="txtDropTitle">डॉक्यूमेंट या फोटो चुनें</h3>
-        <p style="font-size: 12px; color: var(--text-muted);" id="txtDropSub">सभी मोबाइल व कैमरा फ़ॉर्मेट्स तुरंत लोड होंगे</p>
+        <p style="font-size: 12px; color: var(--text-muted);" id="txtDropSub">सभी मोबाइल व कैमरा फ़ॉर्मेट्स (HEIC, JPG, PNG) तुरंत लोड होंगे</p>
         
+        <div class="max-upload-info">
+          ⚡ अधिकतम अपलोड सीमा: 50 MB
+        </div>
+
         <div class="btn-browse" id="txtBtnBrowse">फ़ाइल सेलेक्ट करें</div>
         
-        <!-- सपोर्टेड फॉर्मेट्स सूची -->
         <div class="supported-formats-strip">
           <span class="format-tag highlight">SAMSUNG HEIC</span>
           <span class="format-tag highlight">HEIF</span>
@@ -833,25 +725,24 @@
           <span class="format-tag">PNG</span>
           <span class="format-tag">WEBP</span>
           <span class="format-tag">BMP</span>
-          <span class="format-tag">GIF</span>
-          <span class="format-tag">TIFF</span>
         </div>
 
-        <input type="file" id="fileInput" accept="image/*, .heic, .HEIC, .heif, .HEIF, .webp, .WEBP, .bmp, .BMP, .tiff, .TIFF" style="display: none;" onchange="handleImage(event)">
+        <input type="file" id="fileInput" accept="image/*, .heic, .HEIC, .heif, .HEIF, .webp, .WEBP" style="display: none;" onchange="handleImage(event)">
       </div>
     </div>
 
-    <!-- लेज़र HUD लोडिंग स्क्रीन -->
-    <div class="card processing-overlay" id="processingBox">
-      <div class="cyber-scanner-line"></div>
-      <div class="hud-circle-wrap">
-        <div class="hud-ring-outer"></div>
-        <div class="hud-ring-inner"></div>
-        <div class="hud-percent" id="hudCount">0%</div>
+    <!-- अपलोड टाइम लेज़र HUD -->
+    <div class="card calming-laser-hud" id="laserHud">
+      <div class="laser-beam-header"></div>
+      <div class="hud-orb">
+        <span class="hud-orb-percent" id="hudCount">0%</span>
       </div>
-      <h3 id="stepText" style="font-size: 15px; font-weight: 800; color: var(--text-main);">फ़ाइल डिकोड हो रही है...</h3>
-      <div class="progress-bar-wrap">
-        <div class="progress-bar-fill" id="progressBar"></div>
+      <div>
+        <h3 class="hud-title" id="hudStatus">डॉक्यूमेंट प्रोसेस हो रहा है...</h3>
+        <p class="hud-sub" id="hudSub">अल्ट्रा HD क्लैरिटी और पिक्सल सुरक्षित किए जा रहे हैं</p>
+      </div>
+      <div class="hud-bar-wrap">
+        <div class="hud-bar-fill" id="hudBar"></div>
       </div>
     </div>
 
@@ -859,7 +750,7 @@
     <div class="workspace" id="workspace">
       
       <div class="workspace-top-bar">
-        <div class="file-name-indicator" id="fileNameIndicator">
+        <div class="file-name-indicator">
           <span>📄</span> <span id="loadedFileName">document.jpg</span>
         </div>
         <button class="btn-change-file" onclick="resetTool()" id="txtBtnChangeFile">
@@ -884,7 +775,7 @@
           </div>
         </div>
 
-        <!-- प्रीसेट चिप्स (KB और MB दोनों) -->
+        <!-- प्रीसेट चिप्स -->
         <div class="chips-group">
           <button class="chip-btn" onclick="setPreset(15, 'KB', this)" id="chip1">15 KB (साइन)</button>
           <button class="chip-btn" onclick="setPreset(35, 'KB', this)" id="chip2">35 KB (फोटो)</button>
@@ -892,10 +783,12 @@
           <button class="chip-btn" onclick="setPreset(200, 'KB', this)" id="chip4">200 KB (सरकारी फॉर्म)</button>
           <button class="chip-btn" onclick="setPreset(1, 'MB', this)" id="chip5">1 MB (HD डॉक्यूमेंट)</button>
           <button class="chip-btn" onclick="setPreset(2, 'MB', this)" id="chip6">2 MB (अल्ट्रा HD)</button>
+          <button class="chip-btn" onclick="setPreset(5, 'MB', this)" id="chip7">5 MB (मैक्स प्रिंट)</button>
         </div>
       </div>
 
       <div class="preview-grid">
+        <!-- ओरिजिनल कार्ड -->
         <div class="preview-box">
           <div class="preview-tag">
             <span id="txtOrigTag">ओरिजिनल फ़ाइल</span>
@@ -907,12 +800,15 @@
           <div class="dimension-badge" id="origDimBadge">📐 0 × 0 px</div>
         </div>
 
-        <div class="preview-box" id="compPreviewBox">
+        <!-- रिसाइज़्ड आउटपुट कार्ड (लेज़र एनीमेशन के साथ) -->
+        <div class="preview-box" id="compCardWrap">
           <div class="preview-tag">
             <span id="txtResizedTag">रिसाइज़्ड आउटपुट (तैयार)</span>
-            <span style="color: var(--accent-green);" id="txtDocSafe">सुरक्षित डॉक्यूमेंट</span>
+            <span style="color: var(--accent-green);">सुरक्षित डॉक्यूमेंट</span>
           </div>
           <div class="preview-img-wrap" id="compImgWrap">
+            <div class="card-laser-scanner"></div>
+            <div class="scan-glass-overlay">⚡ AI लेज़र रिसाइज़िंग जारी है...</div>
             <img id="compImg" alt="Compressed">
           </div>
           <div class="dimension-badge" id="compDimBadge" style="color: var(--primary);">📐 0 × 0 px</div>
@@ -921,63 +817,55 @@
 
       <div class="status-banner">
         <div>
-          <h4 id="statusTitle" style="font-size: 14px; font-weight: 800;">✅ फ़ाइल सफलतापूर्वक रिसाइज़ हो गई!</h4>
-          <p id="statusDesc" style="font-size: 11px; color: var(--text-muted);">सभी अक्षर और नंबर बिल्कुल साफ़ रहेंगे</p>
+          <h4 id="statusTitle" style="font-size: 14px; font-weight: 800;">⚡ फ़ाइल प्रोसेस हो रही है...</h4>
+          <p id="statusDesc" style="font-size: 11px; color: var(--text-muted);">सटीक साइज़ और क्लैरिटी ट्यूनिंग जारी</p>
         </div>
         <div class="result-kb" id="finalSizeDisplay">-- KB</div>
       </div>
 
-      <button class="btn-download" id="downloadBtn" onclick="triggerDownload()">
-        <span id="btnIcon">📥</span> <span id="btnText">रिसाइज़्ड फ़ाइल डाउनलोड करें</span>
-      </button>
+      <!-- डाउनलोड बटन (रिसाइज़ होने तक पूर्णतः HIDE) -->
+      <div class="download-zone-wrap" id="downloadZone">
+        <button class="btn-download" id="downloadBtn" onclick="triggerDownload()">
+          <span>📥</span> <span id="btnText">रिसाइज़्ड फ़ाइल डाउनलोड करें</span>
+        </button>
+      </div>
 
     </div>
   </main>
 
-  <div class="download-toast" id="downloadToast">
-    ✓ फ़ाइल डाउनलोड होकर गैलरी में सेव हो गई!
-  </div>
-
   <div class="custom-modal-backdrop" id="alertModal">
     <div class="custom-modal-card">
-      <div class="modal-icon-badge badge-warn" id="modalBadge">⚠️</div>
-      <div class="modal-msg" id="modalMsg">संदेश यहाँ आएगा</div>
-      <button class="btn-modal-ok" onclick="closeAlertModal()" id="btnModalOk">ठीक है</button>
+      <div style="font-size: 28px;">⚠️</div>
+      <div id="modalMsg" style="font-size: 14px; font-weight: 700;">संदेश</div>
+      <button class="btn-modal-ok" onclick="closeAlertModal()">ठीक है</button>
     </div>
   </div>
 
   <footer>
     <div class="footer-content">
-      <div class="footer-wa-card">
-        <div class="footer-wa-text">
-          <h4 id="txtWaCardTitle">📚 बोर्ड परीक्षा व स्टडी के महत्वपूर्ण प्रश्न पाएं</h4>
-          <p id="txtWaCardDesc">हमारे आधिकारिक WhatsApp चैनल से जुड़ें और रोज़ाना उपयोगी प्रश्न व अपडेट सीधे प्राप्त करें।</p>
-        </div>
-        <a href="https://whatsapp.com/channel/0029VbDgXJG0lwgytlQMHP0I" target="_blank" class="btn-footer-wa">
-          🟢 <span id="txtBtnJoinWa">WhatsApp चैनल से जुड़ें</span>
-        </a>
-      </div>
-
-      <div class="footer-brand">Nischay<span>Docs</span></div>
-      <p style="font-size: 12px; margin: 0;">छात्रों के लिए 100% मुफ़्त और सुरक्षित फ़ाइल रिसाइज़र</p>
+      <a href="https://whatsapp.com/channel/0029VbDgXJG0lwgytlQMHP0I" target="_blank" class="btn-footer-wa">
+        🟢 Join Class 10th Quiz on WhatsApp
+      </a>
       
       <div class="footer-links">
-        <a href="index.html">मुख्य रिसाइज़र टूल</a>
-        <a href="privacy.html">प्राइवेसी पॉलिसी</a>
-        <a href="terms.html">नियम व शर्तें</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
       </div>
-      <div style="font-size: 11px; color: #64748b;">© 2026 Nischay Docs • सर्वाधिकार सुरक्षित</div>
+
+      <div style="font-weight: 800; color: #fff;">Nischay<span style="color: #38bdf8;">Docs</span></div>
+      <p style="font-size: 11px;">© 2026 Nischay Docs • Made with ❤️ by Prince Kumar</p>
     </div>
   </footer>
 
   <script>
-    let currentLang = 'hi';
+    const RENDER_HEIC_URL = "https://nischay-heic-api.onrender.com/convert";
 
+    let currentLang = 'hi';
     const langData = {
       hi: {
         langBtnLabel: "English",
         heroTitle: "अल्ट्रा HD फोटो व डॉक्यूमेंट रिसाइज़र",
-        heroDesc: "पूरी फाइल सुरक्षित रहेगी—कोई ऑटो-कटिंग नहीं! सटीक KB और MB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।",
+        heroDesc: "पूरी फाइल सुरक्षित रहेगी—सटीक KB और MB में डॉक्यूमेंट बिना पिक्सल फटे तैयार करें।",
         qualityBadge: "✨ 100% फुल डॉक्यूमेंट (टारगेट साइज़ से कभी अधिक नहीं)",
         dropTitle: "डॉक्यूमेंट या फोटो चुनें",
         dropSub: "सभी मोबाइल व कैमरा फ़ॉर्मेट्स तुरंत लोड होंगे",
@@ -991,20 +879,15 @@
         chip4: "200 KB (सरकारी फॉर्म)",
         chip5: "1 MB (HD डॉक्यूमेंट)",
         chip6: "2 MB (अल्ट्रा HD)",
+        chip7: "5 MB (मैक्स प्रिंट)",
         origTag: "ओरिजिनल फ़ाइल",
         resizedTag: "रिसाइज़्ड आउटपुट (तैयार)",
-        docSafe: "सुरक्षित डॉक्यूमेंट",
-        statusTitle: "✅ फ़ाइल सफलतापूर्वक रिसाइज़ हो गई!",
-        btnDownload: "रिसाइज़्ड फ़ाइल डाउनलोड करें",
-        btnModalOk: "ठीक है",
-        waCardTitle: "📚 बोर्ड परीक्षा व स्टडी के महत्वपूर्ण प्रश्न पाएं",
-        waCardDesc: "हमारे आधिकारिक WhatsApp चैनल से जुड़ें और रोज़ाना उपयोगी प्रश्न व अपडेट सीधे प्राप्त करें।",
-        btnJoinWa: "WhatsApp चैनल से जुड़ें"
+        btnDownload: "रिसाइज़्ड फ़ाइल डाउनलोड करें"
       },
       en: {
         langBtnLabel: "हिंदी",
         heroTitle: "Ultra HD Photo & Document Resizer",
-        heroDesc: "100% Full Document Preservation (No Cropping). Compress to exact KB & MB without pixel blur.",
+        heroDesc: "100% Full Document Preservation. Compress to exact KB & MB without pixel blur.",
         qualityBadge: "✨ 100% Full Document (Never exceeds target size)",
         dropTitle: "Select Document or Photo",
         dropSub: "All mobile & camera formats load instantly",
@@ -1018,22 +901,16 @@
         chip4: "200 KB (Govt Forms)",
         chip5: "1 MB (HD Document)",
         chip6: "2 MB (Ultra HD)",
+        chip7: "5 MB (Max Print)",
         origTag: "Original File",
         resizedTag: "Resized Output (Ready)",
-        docSafe: "Preserved Document",
-        statusTitle: "✅ File Resized Successfully!",
-        btnDownload: "Download Resized File",
-        btnModalOk: "Got it",
-        waCardTitle: "📚 Get Important Exam & Study Questions",
-        waCardDesc: "Join our official WhatsApp channel for daily practice questions and important study updates.",
-        btnJoinWa: "Join WhatsApp Channel"
+        btnDownload: "Download Resized File"
       }
     };
 
     function toggleLanguage() {
       currentLang = currentLang === 'hi' ? 'en' : 'hi';
       const d = langData[currentLang];
-
       document.getElementById('langLabel').innerText = d.langBtnLabel;
       document.getElementById('txtHeroTitle').innerText = d.heroTitle;
       document.getElementById('txtHeroDesc').innerText = d.heroDesc;
@@ -1050,132 +927,35 @@
       document.getElementById('chip4').innerText = d.chip4;
       document.getElementById('chip5').innerText = d.chip5;
       document.getElementById('chip6').innerText = d.chip6;
+      document.getElementById('chip7').innerText = d.chip7;
       document.getElementById('txtOrigTag').innerText = d.origTag;
       document.getElementById('txtResizedTag').innerText = d.resizedTag;
-      document.getElementById('txtDocSafe').innerText = d.docSafe;
-      document.getElementById('statusTitle').innerText = d.statusTitle;
       document.getElementById('btnText').innerText = d.btnDownload;
-      document.getElementById('btnModalOk').innerText = d.btnModalOk;
-      document.getElementById('txtWaCardTitle').innerText = d.waCardTitle;
-      document.getElementById('txtWaCardDesc').innerText = d.waCardDesc;
-      document.getElementById('txtBtnJoinWa').innerText = d.btnJoinWa;
     }
-
-    // साइबर पार्टिकल बैकग्राउंड
-    const canvas = document.getElementById('bgCanvas');
-    const ctx = canvas.getContext('2d');
-    let particlesArray = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.7;
-        this.speedY = (Math.random() - 0.5) * 0.7;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-      }
-      draw() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        ctx.fillStyle = isDark ? 'rgba(56, 189, 248, 0.4)' : 'rgba(37, 99, 235, 0.35)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function initParticles() {
-      particlesArray = [];
-      const count = Math.floor((canvas.width * canvas.height) / 14000);
-      for (let i = 0; i < count; i++) {
-        particlesArray.push(new Particle());
-      }
-    }
-    initParticles();
-
-    function connectParticles() {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const lineColor = isDark ? 'rgba(56, 189, 248, 0.12)' : 'rgba(37, 99, 235, 0.08)';
-
-      for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-          const dx = particlesArray[a].x - particlesArray[b].x;
-          const dy = particlesArray[a].y - particlesArray[b].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 110) {
-            ctx.strokeStyle = lineColor;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-      }
-      connectParticles();
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    let sourceImage = null;
-    let originalFileSize = 0;
-    let finalBlob = null;
-    let targetKB = 100;
-    let currentUnit = 'KB';
 
     function toggleTheme() {
       const root = document.documentElement;
       const isDark = root.getAttribute('data-theme') === 'dark';
-      const targetTheme = isDark ? 'light' : 'dark';
-      root.setAttribute('data-theme', targetTheme);
-      document.getElementById('themeBtn').innerHTML = targetTheme === 'dark' ? '☀️ <span>Light Mode</span>' : '🌙 <span>Dark Mode</span>';
+      root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('themeBtn').innerHTML = isDark ? '🌙 <span>Dark Mode</span>' : '☀️ <span>Light Mode</span>';
     }
 
-    function showAlertModal(msgHi, msgEn, type = "warn") {
-      const modal = document.getElementById('alertModal');
-      const badge = document.getElementById('modalBadge');
-      document.getElementById('modalMsg').innerText = currentLang === 'hi' ? msgHi : msgEn;
-
-      badge.className = type === "info" ? "modal-icon-badge badge-info" : "modal-icon-badge badge-warn";
-      badge.innerText = type === "info" ? "ℹ️" : "⚠️";
-      modal.style.display = "flex";
+    function showAlertModal(msg) {
+      document.getElementById('modalMsg').innerText = msg;
+      document.getElementById('alertModal').style.display = 'flex';
     }
-
     function closeAlertModal() {
-      document.getElementById('alertModal').style.display = "none";
+      document.getElementById('alertModal').style.display = 'none';
     }
 
-    function showDownloadToast(msg) {
-      const toast = document.getElementById('downloadToast');
-      toast.innerText = msg;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
-    }
+    let sourceImage = null;
+    let originalFileSize = 0;
+    let finalBlob = null;
+    let currentObjectUrl = null;
+    let targetKB = 100;
+    let currentUnit = 'KB';
+    let hudInterval = null;
 
-    // यूनिट बदलने का हैंडलर (KB <-> MB)
     function handleUnitChange() {
       const selector = document.getElementById('sizeUnitSelector');
       const input = document.getElementById('targetSizeInput');
@@ -1190,130 +970,147 @@
       currentUnit = newUnit;
     }
 
-    // सुपर-रॉबस्ट इमेज लोडर
+    // स्मूद 0% से 95% तक चलने वाला लाइव टाइमर
+    function startLaserHud(isHeic) {
+      const hud = document.getElementById('laserHud');
+      const count = document.getElementById('hudCount');
+      const bar = document.getElementById('hudBar');
+      const status = document.getElementById('hudStatus');
+
+      hud.style.display = 'flex';
+      let currentProgress = 5;
+      count.innerText = '5%';
+      bar.style.width = '5%';
+
+      status.innerText = isHeic ? "Samsung HEIC फ़ाइल डिकोड हो रही है..." : "डॉक्यूमेंट तुरंत लोड हो रहा है...";
+
+      if (hudInterval) clearInterval(hudInterval);
+      
+      hudInterval = setInterval(() => {
+        if (currentProgress < 94) {
+          currentProgress += (94 - currentProgress) * 0.08;
+          const rounded = Math.floor(currentProgress);
+          count.innerText = rounded + '%';
+          bar.style.width = rounded + '%';
+
+          if (rounded > 40 && rounded < 75) {
+            status.innerText = "पिक्सेल क्लैरिटी और ओरिजिनल रेज़ोल्यूशन जाँचा जा रहा है...";
+          } else if (rounded >= 75) {
+            status.innerText = "अल्ट्रा HD मैट्रिक्स लॉक की जा रही है...";
+          }
+        }
+      }, 80);
+    }
+
+    function stopLaserHud() {
+      if (hudInterval) clearInterval(hudInterval);
+      const count = document.getElementById('hudCount');
+      const bar = document.getElementById('hudBar');
+      count.innerText = '100%';
+      bar.style.width = '100%';
+
+      setTimeout(() => {
+        document.getElementById('laserHud').style.display = 'none';
+      }, 200);
+    }
+
+    // मुख्य अपलोड और लोडिंग फ़ंक्शन
     async function handleImage(e) {
       let file = e.target.files[0];
       if (!file) return;
 
+      if (file.size > 50 * 1024 * 1024) {
+        showAlertModal("फ़ाइल 50 MB से अधिक है! कृपया 50 MB तक की फ़ाइल चुनें।");
+        return;
+      }
+
+      if (currentObjectUrl) {
+        URL.revokeObjectURL(currentObjectUrl);
+        currentObjectUrl = null;
+      }
       sourceImage = null;
       finalBlob = null;
       document.getElementById('origImg').src = '';
       document.getElementById('compImg').src = '';
-      document.getElementById('finalSizeDisplay').innerText = '-- KB';
-      document.getElementById('origDimBadge').innerText = '📐 0 × 0 px';
-      document.getElementById('compDimBadge').innerText = '📐 0 × 0 px';
+      document.getElementById('downloadZone').style.display = 'none';
 
       originalFileSize = file.size;
       document.getElementById('loadedFileName').innerText = file.name;
-      const pBox = document.getElementById('processingBox');
-      const stepText = document.getElementById('stepText');
-      
       document.getElementById('uploadCard').style.display = 'none';
       document.getElementById('workspace').style.display = 'none';
-      pBox.style.display = 'flex';
 
       const fileName = file.name.toLowerCase();
       const isHeic = fileName.endsWith('.heic') || fileName.endsWith('.heif') || file.type.includes('heic') || file.type.includes('heif');
 
-      if (isHeic) {
-        stepText.innerText = currentLang === 'hi' ? "Samsung HEIC फ़ाइल प्रोसेस हो रही है..." : "Processing Samsung HEIC file...";
-        
-        let processedSuccessfully = false;
+      startLaserHud(isHeic);
 
-        // 1. हाई-स्पीड HEIC डिकोडिंग इंजन (Fast API Engine)
+      // HEIC रूपांतरण (Render API + Local Fallback)
+      if (isHeic) {
+        let converted = false;
+        
+        // 1. Render API कनवर्टर (बिना किसी मेमोरी क्रैश के सीधे JPEG में)
         try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 12000); // 12s का सुरक्षित समय
+
           const formData = new FormData();
           formData.append("file", file);
 
-          const response = await fetch("https://nischay-heic-api.onrender.com/convert", {
+          const res = await fetch(RENDER_HEIC_URL, {
             method: "POST",
-            body: formData
+            body: formData,
+            signal: controller.signal
           });
+          clearTimeout(timeoutId);
 
-          if (response.ok) {
-            file = await response.blob();
-            processedSuccessfully = true;
+          if (res.ok) {
+            file = await res.blob();
+            converted = true;
           }
-        } catch (engineErr) {
-          console.warn("Direct engine fallback trigger:", engineErr);
+        } catch (err) {
+          console.warn("Render API fallback -> Local");
         }
 
-        // 2. ऑटोमैटिक लोकल डिकोडर फॉलबैक
-        if (!processedSuccessfully && typeof heic2any !== 'undefined') {
+        // 2. लोकल heic2any फ़ॉलबैक (अगर API उपलब्ध न हो)
+        if (!converted && typeof heic2any !== 'undefined') {
           try {
-            const localBlob = await Promise.race([
-              heic2any({ blob: file, toType: "image/jpeg", quality: 0.85 }),
-              new Promise((_, rej) => setTimeout(() => rej(new Error("Timeout")), 3500))
-            ]);
+            const localBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.92 });
             file = Array.isArray(localBlob) ? localBlob[0] : localBlob;
-            processedSuccessfully = true;
-          } catch (localErr) {
-            console.warn("Local converter timeout:", localErr);
+            converted = true;
+          } catch (e) {
+            console.error("Local HEIC fail", e);
           }
         }
       }
 
-      // यूनिवर्सल रेंडरिंग इंजन
+      // सुरक्षित और क्लीन इमेज लोडर
       try {
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function(evt) {
           const img = new Image();
           img.onload = function() {
             sourceImage = img;
             document.getElementById('origImg').src = img.src;
             document.getElementById('origSizeLabel').innerText = (originalFileSize / (1024 * 1024)).toFixed(2) + ' MB';
             document.getElementById('origDimBadge').innerText = `📐 ${img.width} × ${img.height} px`;
-            runAiScanAnimation();
-          };
-          img.onerror = function() {
-            showAlertModal(
-              "फ़ाइल डिकोड नहीं हो सकी। कृपया इसे सामान्य JPG फ़ोटो के रूप में चुनें।",
-              "File could not be decoded. Please choose standard JPG.",
-              "warn"
-            );
-            resetTool();
-          };
-          img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      } catch (fatalErr) {
-        showAlertModal("फ़ाइल लोड करने में समस्या आई।", "Error loading file.", "warn");
-        resetTool();
-      }
-    }
-
-    // साइबर लोडर एनिमेशन
-    function runAiScanAnimation() {
-      const pBox = document.getElementById('processingBox');
-      const bar = document.getElementById('progressBar');
-      const hudCount = document.getElementById('hudCount');
-      const stepText = document.getElementById('stepText');
-      
-      bar.style.width = '0%';
-      let progress = 0;
-
-      const interval = setInterval(() => {
-        progress += 12;
-        if (progress > 100) progress = 100;
-        
-        bar.style.width = progress + '%';
-        hudCount.innerText = progress + '%';
-
-        if (progress === 36) {
-          stepText.innerText = currentLang === 'hi' ? "पिक्सल ग्रिड और रेज़ोल्यूशन पढ़ा जा रहा है..." : "Reading pixel matrix...";
-        } else if (progress === 72) {
-          stepText.innerText = currentLang === 'hi' ? "अल्ट्रा HD क्लैरिटी लॉक हो रही है..." : "Locking Ultra HD clarity...";
-        }
-
-        if (progress >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            pBox.style.display = 'none';
+            
+            stopLaserHud();
             document.getElementById('workspace').style.display = 'flex';
             processPureResizing();
-          }, 120);
-        }
-      }, 25);
+          };
+          img.onerror = function() {
+            stopLaserHud();
+            showAlertModal("फ़ाइल डिकोड नहीं हो सकी। कृपया इसे सामान्य JPG फ़ोटो के रूप में चुनें।");
+            resetTool();
+          };
+          img.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      } catch (err) {
+        stopLaserHud();
+        showAlertModal("फ़ाइल पढ़ने में समस्या आई।");
+        resetTool();
+      }
     }
 
     function setPreset(val, unit, btn) {
@@ -1321,191 +1118,179 @@
       document.getElementById('sizeUnitSelector').value = unit;
       document.getElementById('targetSizeInput').value = val;
       
-      targetKB = unit === 'MB' ? Math.round(val * 1024) : val;
+      const calKB = unit === 'MB' ? Math.round(val * 1024) : val;
+      const origKB = originalFileSize / 1024;
+
+      // अगर फ़ाइल को मूल साइज़ से बड़ा करने की कोशिश की जाए
+      if (calKB > origKB) {
+        const origText = origKB >= 1024 ? (origKB / 1024).toFixed(2) + " MB" : origKB.toFixed(1) + " KB";
+        const targetText = unit === 'MB' ? val + " MB" : val + " KB";
+        
+        showAlertModal(
+          `आपकी फ़ाइल का मूल साइज़ ${origText} है। इसे बढ़ाकर ${targetText} करने से क्वालिटी बेहतर नहीं होगी। फ़ाइल को मूल HD क्वालिटी में ही तैयार किया जा रहा है।`
+        );
+        targetKB = Math.round(origKB);
+      } else {
+        targetKB = calKB;
+      }
 
       document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      
-      triggerResizePulse();
+      triggerResize();
     }
 
     function applyCustomTargetSize() {
-      const inputVal = parseFloat(document.getElementById('targetSizeInput').value);
+      const val = parseFloat(document.getElementById('targetSizeInput').value);
       const unit = document.getElementById('sizeUnitSelector').value;
       currentUnit = unit;
 
-      if (isNaN(inputVal) || inputVal <= 0) {
-        showAlertModal("कृपया सही साइज़ दर्ज करें।", "Please enter a valid file size.");
+      if (isNaN(val) || val <= 0) {
+        showAlertModal("कृपया सही साइज़ दर्ज करें।");
         return;
       }
 
-      let calculatedKB = unit === 'MB' ? Math.round(inputVal * 1024) : Math.round(inputVal);
+      let calKB = unit === 'MB' ? Math.round(val * 1024) : Math.round(val);
+      const origKB = originalFileSize / 1024;
 
-      // अधिकतम 10 MB (10240 KB) तक की सुरक्षा
-      if (calculatedKB > 10240) {
+      // कम साइज़ को बड़ा करने पर साफ़ चेतावनी
+      if (calKB > origKB) {
+        const origText = origKB >= 1024 ? (origKB / 1024).toFixed(2) + " MB" : origKB.toFixed(1) + " KB";
+        const targetText = unit === 'MB' ? val + " MB" : val + " KB";
+        
         showAlertModal(
-          "अधिकतम साइज़ सीमा 10 MB (10240 KB) है।",
-          "Maximum allowed file size limit is 10 MB."
+          `आपकी फ़ाइल का मूल साइज़ ${origText} है। इसे बढ़ाकर ${targetText} करने से क्वालिटी बेहतर नहीं होगी। फ़ाइल को मूल HD क्वालिटी में ही तैयार किया जा रहा है।`
         );
-        calculatedKB = 10240;
-        document.getElementById('targetSizeInput').value = unit === 'MB' ? 10 : 10240;
+        calKB = Math.round(origKB);
       }
 
-      if (calculatedKB < 10) {
-        showAlertModal(
-          "न्यूनतम साइज़ 10 KB होना चाहिए ताकि लिखावट साफ़ रहे।",
-          "Minimum allowed size is 10 KB to preserve legibility."
-        );
-        calculatedKB = 10;
-        document.getElementById('targetSizeInput').value = unit === 'MB' ? 0.01 : 10;
-      }
+      if (calKB > 20480) calKB = 20480;
+      if (calKB < 10) calKB = 10;
 
-      const origKb = originalFileSize / 1024;
-      if (origKb < calculatedKB) {
-        showAlertModal(
-          `आपकी फ़ाइल पहले से ही ${(origKb >= 1024 ? (origKb/1024).toFixed(2) + ' MB' : origKb.toFixed(1) + ' KB')} की है। इसे मूल HD क्वालिटी में सेव किया गया।`,
-          `Your source file is already smaller than target. Kept at original HD quality.`,
-          "info"
-        );
-      }
-
-      targetKB = calculatedKB;
+      targetKB = calKB;
       document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
-      
-      triggerResizePulse();
+      triggerResize();
     }
 
-    // 150ms क्वांटम रिसाइज़ पल्स एनिमेशन
-    function triggerResizePulse() {
+    function triggerResize() {
       const wrap = document.getElementById('compImgWrap');
-      const display = document.getElementById('finalSizeDisplay');
+      const dlZone = document.getElementById('downloadZone');
       
-      wrap.classList.add('resizing-pulse');
-      display.innerText = "⚡ ...";
+      dlZone.style.display = 'none'; // रिसाइज़ शुरू होते ही डाउनलोड बटन HIDE
+      wrap.classList.add('scanning-active'); // लेज़र ऑन
+      document.getElementById('statusTitle').innerText = "⚡ AI लेज़र रिसाइज़िंग जारी है...";
+      document.getElementById('finalSizeDisplay').innerText = "⚡ ...";
 
       setTimeout(() => {
         processPureResizing().then(() => {
-          wrap.classList.remove('resizing-pulse');
-          display.classList.add('pop');
-          setTimeout(() => display.classList.remove('pop'), 250);
+          wrap.classList.remove('scanning-active'); // लेज़र ऑफ
         });
-      }, 80);
+      }, 150);
     }
 
-    // शुद्ध 1-स्टेप हाई प्रिसिजन रिसाइज़िंग इंजन (KB व MB दोनों के लिए)
+    // शुद्ध सटीक रिसाइज़िंग इंजन
     async function processPureResizing() {
       if (!sourceImage) return;
 
-      let targetWidth = 1200;
-      if (targetKB >= 1024) {
-        targetWidth = 2400; // 1MB+ के लिए अल्ट्रा हाई रेज़ोल्यूशन
-      } else if (targetKB < 80) {
-        targetWidth = 700;
+      const wrap = document.getElementById('compImgWrap');
+      wrap.classList.add('scanning-active');
+      document.getElementById('downloadZone').style.display = 'none';
+
+      // 50MP और उच्च मेगापिक्सल के लिए डायनामिक क्लैरिटी ग्रिड
+      let maxDim = 4000;
+      if (targetKB >= 4096) maxDim = 4500;
+      else if (targetKB >= 2048) maxDim = 3200;
+      else if (targetKB >= 1024) maxDim = 2400;
+      else if (targetKB >= 300) maxDim = 1800;
+      else if (targetKB >= 80) maxDim = 1200;
+      else maxDim = 800;
+
+      let targetWidth = sourceImage.width;
+      let targetHeight = sourceImage.height;
+
+      if (Math.max(targetWidth, targetHeight) > maxDim) {
+        if (targetWidth > targetHeight) {
+          targetHeight = Math.round((targetHeight / targetWidth) * maxDim);
+          targetWidth = maxDim;
+        } else {
+          targetWidth = Math.round((targetWidth / targetHeight) * maxDim);
+          targetHeight = maxDim;
+        }
       }
 
-      let targetHeight = Math.round((sourceImage.height / sourceImage.width) * targetWidth);
-
-      if (sourceImage.width < targetWidth) {
-        targetWidth = sourceImage.width;
-        targetHeight = sourceImage.height;
-      }
-
-      const offCanvas = document.createElement('canvas');
-      offCanvas.width = targetWidth;
-      offCanvas.height = targetHeight;
-      const offCtx = offCanvas.getContext('2d');
-      offCtx.imageSmoothingEnabled = true;
-      offCtx.imageSmoothingQuality = 'high';
-      offCtx.drawImage(sourceImage, 0, 0, targetWidth, targetHeight);
+      const canvas = document.createElement('canvas');
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(sourceImage, 0, 0, targetWidth, targetHeight);
 
       document.getElementById('compDimBadge').innerText = `📐 ${targetWidth} × ${targetHeight} px`;
 
-      let low = 0.05;
-      let high = 0.98;
-      let bestUnderTargetBlob = null;
-      let fallbackBlob = null;
+      let low = 0.05, high = 1.0;
+      let bestBlob = null, closest = null;
 
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 14; i++) {
         const mid = (low + high) / 2;
-        const blob = await new Promise(resolve => offCanvas.toBlob(resolve, 'image/jpeg', mid));
-        const currentKb = blob.size / 1024;
+        const b = await new Promise(res => canvas.toBlob(res, 'image/jpeg', mid));
+        const kb = b.size / 1024;
+        closest = b;
 
-        fallbackBlob = blob;
-
-        if (currentKb <= targetKB) {
-          bestUnderTargetBlob = blob;
+        if (kb <= targetKB) {
+          bestBlob = b;
           low = mid;
         } else {
           high = mid;
         }
       }
-      finalBlob = bestUnderTargetBlob || fallbackBlob;
 
-      const resultUrl = URL.createObjectURL(finalBlob);
-      document.getElementById('compImg').src = resultUrl;
-      
-      const resultKb = finalBlob.size / 1024;
-      const formattedOutput = resultKb >= 1024 
-        ? (resultKb / 1024).toFixed(2) + ' MB' 
-        : resultKb.toFixed(1) + ' KB';
+      finalBlob = bestBlob || closest;
 
-      const targetFormatted = targetKB >= 1024 
-        ? (targetKB / 1024).toFixed(1) + ' MB' 
-        : targetKB + ' KB';
+      if (currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);
+      currentObjectUrl = URL.createObjectURL(finalBlob);
+      document.getElementById('compImg').src = currentObjectUrl;
 
-      document.getElementById('finalSizeDisplay').innerText = formattedOutput;
-      document.getElementById('statusDesc').innerText = currentLang === 'hi'
-        ? `टारगेट: ${targetFormatted} | तैयार: ${formattedOutput} (100% सटीक रिसाइज़)`
-        : `Target: ${targetFormatted} | Ready: ${formattedOutput} (100% Accurate)`;
+      const resKb = finalBlob.size / 1024;
+      const formatted = resKb >= 1024 ? (resKb / 1024).toFixed(2) + ' MB' : resKb.toFixed(1) + ' KB';
+      const targetTxt = targetKB >= 1024 ? (targetKB / 1024).toFixed(1) + ' MB' : targetKB + ' KB';
+
+      document.getElementById('finalSizeDisplay').innerText = formatted;
+      document.getElementById('statusTitle').innerText = "✅ फ़ाइल सफलतापूर्वक रिसाइज़ हो गई!";
+      document.getElementById('statusDesc').innerText = `टारगेट: ${targetTxt} | तैयार: ${formatted} (सटीक रिसाइज़)`;
+
+      wrap.classList.remove('scanning-active');
+      document.getElementById('downloadZone').style.display = 'block'; // रिसाइज़ पूरा होने पर ही प्रकट
     }
 
     function triggerDownload() {
       if (!finalBlob) return;
-      const btn = document.getElementById('downloadBtn');
-      const btnIcon = document.getElementById('btnIcon');
-      const btnText = document.getElementById('btnText');
-
-      btn.classList.add('success');
-      btnIcon.innerText = "✓";
-      btnText.innerText = currentLang === 'hi' ? "डाउनलोड पूरा हुआ!" : "Download Complete!";
-
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 75, spread: 65, origin: { y: 0.65 } });
+        confetti({ particleCount: 65, spread: 65, origin: { y: 0.7 } });
       }
 
-      showDownloadToast(
-        currentLang === 'hi' 
-          ? "✓ फ़ाइल सफलतापूर्वक डाउनलोड होकर गैलरी में सेव हो गई!" 
-          : "✓ File saved successfully to Gallery/Downloads!"
-      );
-
-      const fileUrl = window.URL.createObjectURL(finalBlob);
       const link = document.createElement('a');
-      link.style.display = 'none';
-      link.href = fileUrl;
-      
-      const fileLabel = targetKB >= 1024 ? `${(targetKB/1024).toFixed(1)}MB` : `${targetKB}KB`;
-      link.download = `NischayDocs_${fileLabel}_${Date.now()}.jpg`;
-      
+      link.href = currentObjectUrl;
+      const label = targetKB >= 1024 ? `${(targetKB/1024).toFixed(1)}MB` : `${targetKB}KB`;
+      link.download = `NischayDocs_${label}_${Date.now()}.jpg`;
       document.body.appendChild(link);
       link.click();
-      
-      setTimeout(() => {
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(fileUrl);
-        btn.classList.remove('success');
-        btnIcon.innerText = "📥";
-        btnText.innerText = currentLang === 'hi' ? "रिसाइज़्ड फ़ाइल डाउनलोड करें" : "Download Resized File";
-      }, 2500);
+      document.body.removeChild(link);
     }
 
     function resetTool() {
+      if (currentObjectUrl) {
+        URL.revokeObjectURL(currentObjectUrl);
+        currentObjectUrl = null;
+      }
       sourceImage = null;
       finalBlob = null;
       document.getElementById('fileInput').value = '';
+      document.getElementById('origImg').src = '';
+      document.getElementById('compImg').src = '';
       document.getElementById('uploadCard').style.display = 'block';
       document.getElementById('workspace').style.display = 'none';
-      document.getElementById('processingBox').style.display = 'none';
+      document.getElementById('laserHud').style.display = 'none';
+      document.getElementById('downloadZone').style.display = 'none';
     }
   </script>
 </body>
